@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>XB平台子系统</title>
+<link rel="stylesheet" rev="stylesheet" href="css/style.css" type="text/css" media="all" />
+<script language="JavaScript" type="text/javascript">
+
+</script>
+<style type="text/css">
+<!--
+.atten {font-size:12px;font-weight:normal;color:#F00;}
+.leftTD{
+	text-align:left;
+}
+-->
+</style>
+</head>
+
+<body class="ContentBody">
+  <form action="" method="post" name="fom" id="fom" target="sypost" >
+<div class="MainDiv">
+<table width="99%" border="0" cellpadding="0" cellspacing="0" class="CContent">
+  <tr>
+      <th class="tablestyle_title" >用户信息修改</th>
+  </tr>
+  <tr>
+    <td class="CPanel">
+		
+		<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+		<tr><td align="left">
+		<input type="button" name="Submit" value="修改" class="button" onclick="alert('修改成功！');"/>　
+			
+			<input type="button" name="Submit2" value="返回" class="button" onclick="window.history.go(-1);"/>
+		</td></tr>
+
+		<TR>
+			<TD width="100%">
+				<fieldset style="height:100%;">
+				<legend>修改用户信息</legend>
+					  <table border="0" cellpadding="2" cellspacing="1" style="width:100%">
+					 
+					  <tr>
+					    <td align="right" width="30%">用户名:</td>
+					    <td width="20%">张三</td>
+					    <td align="right" width="10%">账号:</td>
+					    <td width="40%">zhangsan</td>
+					  </tr>
+					  
+					  <tr>
+					    <td align="right">注册时间:</td>
+					    <td>2013-09-02</td>
+					    <td align="right">最后登陆时间:</td>
+					    <td>2013-09-02</td>
+					  </tr>
+					  
+					   <tr>
+					    <td align="right">状态:</td>
+					    <td>
+							<select id="status" name="status" >
+								<option value="0" selected="selected">请选择</option>
+								<option value="1">禁用</option>
+								<option value="2">激活</option>
+							</select>
+						</td>
+						
+					    <td align="right">Email:</td>
+					    <td><input type="text" id="email" name="email" /> </td>
+						</tr>
+					 
+					 <tr>
+					    <td align="right">手机:</td>
+					    <td><input type="text" id="mobile" name="mobile" /></td>
+					    <td align="right">用户组:</td>
+					    <td >
+							<select id="status" name="status" >
+								<option value="0" selected="selected">请选择</option>
+								<option value="1">注册用户组</option>
+								<option value="2">公司员工组</option>
+								<option value="3">维护员组</option>
+                                <option value="3">管理员组</option>
+							</select>
+						</td>
+					  </tr>
+					  
+					  <tr>
+					    <td align="right">邮编:</td>
+					    <td><input type="text" id="zipCode" name="zipCode" /></td>
+					    <td align="right"></td>
+					    <td >
+							
+						</td>
+					  </tr>
+					  
+					   <tr>
+					    <td align="right">地址:</td>
+					    <td colspan="3">
+							<select id="adress" name="adress" >
+								<option value="0" selected="selected">请选择</option>
+								<option value="1">上海市</option>
+								<option value="1">北京市</option>
+							</select>
+							
+							<select id="adress" name="adress" >
+								<option value="0" selected="selected">请选择</option>
+								<option value="1">市辖区</option>
+								<option value="1">县</option>
+							</select>
+							
+							<select id="adress" name="adress" >
+								<option value="0" selected="selected">请选择</option>
+								<option value="1">浦东新区</option>
+								<option value="1">杨浦区</option>
+							</select>
+                            <input type="text" id="address" name="address" />
+						</td>
+				
+				</table>
+			 	<br />
+				</fieldset>
+            </TD>
+		</TR>
+		
+		</TABLE>
+	
+	
+	 </td>
+  </tr>
+  
+
+		
+		
+		
+		
+		<TR>
+			<TD colspan="2" align="center" height="50px">
+			<input type="button" name="Submit" value="修改" class="button" onclick="link();"/>　
+			
+			<input type="button" name="Submit2" value="返回" class="button" onclick="window.history.go(-1);"/></TD>
+		</TR>
+		</TABLE>
+	
+	
+	 </td>
+  </tr>
+  
+  
+  
+  
+  </table>
+
+</div>
+</form>
+</body>
+</html>

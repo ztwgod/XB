@@ -1,0 +1,264 @@
+package cn.com.xb.inter.domain;
+
+import java.io.Serializable;
+
+import cn.com.xb.domain.base.Transaction;
+import cn.com.xb.util.VerifyTool;
+
+public class ITransactionInfo implements Serializable {
+
+	/**
+	 * 交易信息
+	 */
+	private static final long serialVersionUID = 1L;
+
+	private String transactionID;// 交易ID [物箱端的ID，用于与服务器中的数据对应]
+	//private String storageStationId;// 物箱编码
+	private String boxCode;// 箱子编码
+	//private int transactionType;// 交易类型（1，寄件；2，投件；3，寄存）
+	private String supplierId;// 电商供应商代码
+	private String expressDeliveryId;// 快递供应商代码
+	private String expressCode;// 运单号
+	private String expressDescription;// 快件描述信息
+	private int storageTime;// 默认存放时长（单位：min，默认用户取件时长约定为6小时，寄存时长约定为6小时，此期间免费）
+	private int pastDueTime;// 逾期时长 [单位：min]
+	private double totalAmount;	// 本次交易涉及总金额（包含本次交易动作涉及金额）
+	private int payType;// 支付款项类型[1，正常支付；2，逾期支付；3，退还金额]
+	private int payMode;// 支付方式（1，投币；2，平台支付）
+	private String voucherId;// 优惠劵ID【目前只支持一种优惠劵多张累计】（优惠劵只用于APP取件，APP取件过程中，会将使用的优惠劵ID下发）
+	private int voucherTotal;// 优惠劵数量
+	private double payPrice;// 支付金额
+	private String pickupPassword;// 取件密码
+	private int isStandardsCompliant;// 物品是否符合标准资费 [快递员取件时使用]（1，符合；2，不符合）
+	private String notStandardsCompliantCause;// 不符合标准的原因
+	private int expressSizeType;// 尺寸类型（1,超大/2,大/3,中/4,小/5,超小）
+	private ISenderInfo senderInfo;// 发件人信息
+	private IAddresseeInfo addresseeInfo;// 收件人信息
+	private ICourierInfo courierInfo;	// 快递员
+
+	//private ProofInfo proofInfo;//凭证信息
+	
+	
+	/**
+	 * 非空验证
+	 * @return
+	 */
+	public String empty(){
+		StringBuffer buffer = new StringBuffer();
+		if(VerifyTool.isNull(this.transactionID)){
+			buffer.append("transactionID不能为空 。");
+		}
+		if(VerifyTool.isNull(this.boxCode)){
+			buffer.append("boxCode不能为空。");
+		}
+		/*if(VerifyTool.isNull(this.expressDeliveryId)){
+			buffer.append("expressDeliveryId不能为空。");
+		}
+		if(VerifyTool.isNull(this.expressCode)){
+			buffer.append("expressCode不能为空。");
+		}
+		if(this.payType<=0 || this.payType>3){
+			buffer.append("payType输入非法。");
+		}
+		if(this.payMode<=0 || this.payMode>2){
+			buffer.append("payMode输入非法。");
+		}*/
+		if(this.isStandardsCompliant<=0 || this.isStandardsCompliant>2){
+			buffer.append("isStandardsCompliant输入非法。");
+		}
+		/*if(VerifyTool.isNull(this.pickupPassword)){
+			buffer.append("pickupPassword不能为空。");
+		}*/
+		if(this.expressSizeType>5 || this.expressSizeType<=0){
+			buffer.append("expressSizeType非法。");
+		}
+		return buffer.toString();
+	}
+	
+	
+	public Transaction getTransaction(){
+		Transaction transaction = new Transaction();
+		transaction.setTransId(this.transactionID);
+		
+		return transaction;
+	}
+	
+	public String getTransactionID() {
+		return transactionID;
+	}
+
+	public void setTransactionID(String transactionID) {
+		this.transactionID = transactionID;
+	}
+
+	public String getBoxCode() {
+		return boxCode;
+	}
+
+	public void setBoxCode(String boxCode) {
+		this.boxCode = boxCode;
+	}
+
+	public String getSupplierId() {
+		return supplierId;
+	}
+
+	public void setSupplierId(String supplierId) {
+		this.supplierId = supplierId;
+	}
+
+	public String getExpressDeliveryId() {
+		return expressDeliveryId;
+	}
+
+	public void setExpressDeliveryId(String expressDeliveryId) {
+		this.expressDeliveryId = expressDeliveryId;
+	}
+
+	public String getExpressCode() {
+		return expressCode;
+	}
+
+	public void setExpressCode(String expressCode) {
+		this.expressCode = expressCode;
+	}
+
+	public String getExpressDescription() {
+		return expressDescription;
+	}
+
+	public void setExpressDescription(String expressDescription) {
+		this.expressDescription = expressDescription;
+	}
+
+	public int getStorageTime() {
+		return storageTime;
+	}
+
+	public void setStorageTime(int storageTime) {
+		this.storageTime = storageTime;
+	}
+
+	public int getPastDueTime() {
+		return pastDueTime;
+	}
+
+	public void setPastDueTime(int pastDueTime) {
+		this.pastDueTime = pastDueTime;
+	}
+
+	public int getPayType() {
+		return payType;
+	}
+
+	public void setPayType(int payType) {
+		this.payType = payType;
+	}
+
+	public int getPayMode() {
+		return payMode;
+	}
+
+	public void setPayMode(int payMode) {
+		this.payMode = payMode;
+	}
+
+	public double getPayPrice()
+	{
+		return payPrice;
+	}
+
+	public void setPayPrice(double payPrice)
+	{
+		this.payPrice = payPrice;
+	}
+
+	public String getPickupPassword() {
+		return pickupPassword;
+	}
+
+	public void setPickupPassword(String pickupPassword) {
+		this.pickupPassword = pickupPassword;
+	}
+
+	public int getIsStandardsCompliant() {
+		return isStandardsCompliant;
+	}
+
+	public void setIsStandardsCompliant(int isStandardsCompliant) {
+		this.isStandardsCompliant = isStandardsCompliant;
+	}
+
+	public String getNotStandardsCompliantCause() {
+		return notStandardsCompliantCause;
+	}
+
+	public void setNotStandardsCompliantCause(String notStandardsCompliantCause) {
+		this.notStandardsCompliantCause = notStandardsCompliantCause;
+	}
+
+	public int getExpressSizeType() {
+		return expressSizeType;
+	}
+
+	public void setExpressSizeType(int expressSizeType) {
+		this.expressSizeType = expressSizeType;
+	}
+
+	public ISenderInfo getSenderInfo() {
+		return senderInfo;
+	}
+
+	public void setSenderInfo(ISenderInfo senderInfo) {
+		this.senderInfo = senderInfo;
+	}
+
+	public IAddresseeInfo getAddresseeInfo() {
+		return addresseeInfo;
+	}
+
+	public void setAddresseeInfo(IAddresseeInfo addresseeInfo) {
+		this.addresseeInfo = addresseeInfo;
+	}
+
+	public double getTotalAmount()
+	{
+		return totalAmount;
+	}
+
+	public void setTotalAmount(double totalAmount)
+	{
+		this.totalAmount = totalAmount;
+	}
+
+	public String getVoucherId()
+	{
+		return voucherId;
+	}
+
+	public void setVoucherId(String voucherId)
+	{
+		this.voucherId = voucherId;
+	}
+
+	public int getVoucherTotal()
+	{
+		return voucherTotal;
+	}
+
+	public void setVoucherTotal(int voucherTotal)
+	{
+		this.voucherTotal = voucherTotal;
+	}
+
+	public ICourierInfo getCourierInfo()
+	{
+		return courierInfo;
+	}
+
+	public void setCourierInfo(ICourierInfo courierInfo)
+	{
+		this.courierInfo = courierInfo;
+	}
+
+}

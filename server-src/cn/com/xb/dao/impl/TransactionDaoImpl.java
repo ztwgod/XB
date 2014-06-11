@@ -1,0 +1,148 @@
+package cn.com.xb.dao.impl;
+
+import java.sql.Timestamp;
+import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import org.springframework.dao.DataAccessException;
+import org.springframework.jdbc.core.JdbcTemplate;
+
+import  cn.com.xb.dao.ITransactionDao;
+import  cn.com.xb.domain.base.Transaction;
+
+public class TransactionDaoImpl implements ITransactionDao{
+	
+	private JdbcTemplate jdbcTemplate;
+
+	public void setJdbcTemplate(JdbcTemplate jdbcTemplate) {
+		this.jdbcTemplate = jdbcTemplate;
+	}
+	public  List<Transaction> loadTransactionByUserId(String userId) throws Exception {
+		 String sql ="SELECT * FROM T_TRANSACTION WHERE USER_ID=?";
+		 Object[] values = new Object[]{userId};
+		 List<Transaction> list = new ArrayList<Transaction>();
+		 List<Transaction> mapList = jdbcTemplate.queryForList(sql,values);
+		 Iterator it = mapList.iterator();
+		 
+		 while (it.hasNext()) { 
+			 Map map = (Map) it.next();
+			 Transaction transaction = fetch(map); 
+			 list.add(transaction); 
+		 }
+		 return list;
+	}
+	public  List<Transaction> loadTransactionByAddressId(String AdId) throws Exception {
+		 String sql ="SELECT * FROM T_TRANSACTION WHERE ADDRESSEE_ID=?";
+		 Object[] values = new Object[]{AdId};
+		 List<Transaction> list = new ArrayList<Transaction>();
+		 List<Transaction> mapList = jdbcTemplate.queryForList(sql,values);
+		 Iterator it = mapList.iterator();
+		 
+		 while (it.hasNext()) { 
+			 Map map = (Map) it.next();
+			 Transaction transaction = fetch(map); 
+			 list.add(transaction); 
+		 }
+		 return list;
+	}
+	public  List<Transaction> loadAll() throws Exception {
+		 String sql ="SELECT * FROM T_TRANSACTION";
+		 List<Transaction> list = new ArrayList<Transaction>();
+		 List<Transaction> mapList = jdbcTemplate.queryForList(sql);
+		 Iterator it = mapList.iterator();
+		 
+		 while (it.hasNext()) { 
+			 Map map = (Map) it.next();
+			 Transaction transaction = fetch(map); 
+			 list.add(transaction); 
+		 }
+		 return list;
+	}
+	
+	public Transaction loadTransactionBytransId(String transId) throws Exception {
+		 Transaction transaction = null;
+		 String sql ="SELECT * FROM T_TRANSACTION WHERE TRANS_ID = ? ";
+		 Object[] values = new Object[]{transId};
+		 Map map = null;
+		 try{ 
+			 map = jdbcTemplate.queryForMap(sql, values);
+		 } catch (DataAccessException e) {
+			 return null;
+		 }
+		 transaction = fetch(map);
+		 return transaction;
+	}
+	
+	public int loadItems() throws Exception{
+		int items = 0;
+		String sql = "SELECT COUNT(*) CNT FROM T_TRANSACTION";
+		items = jdbcTemplate.queryForInt(sql);
+		return items;
+	}
+	
+	public  void delete(String transId) throws Exception{
+		 String sql ="DELETE FROM T_TRANSACTION WHERE TRANS_ID=?";
+		 Object[] values = new Object[] { transId };
+		 jdbcTemplate.update(sql, values);
+
+	}
+	
+	public  void update(Transaction transaction) throws Exception{
+		 String sql ="UPDATE T_TRANSACTION SET TRANS_CODE= ?,CREATE_TIME= ?,USER_ID= ?,SUPPLIER_ID= ?,COURIER_ID= ?,EXPRESS_DELIVERY_ID= ?,EXPRESS_CODE= ?,EXPRESS_DESC= ?,PAST_DUE_TIME= ?,STORAGE_TIME= ?,PICKUP_PWD= ?,IS_STANDARDS_COMPLIANT= ?,NOT_STANDARDS_COMPLIANT_CAUSE= ?,SENDER_ID= ?,ADDRESSEE_ID= ?,LAST_MODIFY_TIME= ?,CLOSE_TIME= ?,BOX_ID= ?,TRANS_TYPE= ?,BOX_TRANS_ID= ?,TOTAL_AMOUNT= ?,SIZE_TYPE= ?,TRANS_STATUS= ? WHERE TRANS_ID=?";
+		 Object[] values = new Object[] {transaction.getTransCode(),transaction.getCreateTime(),transaction.getUserId(),transaction.getSupplierId(),transaction.getCourierId(),transaction.getExpressDeliveryId(),transaction.getExpressCode(),transaction.getExpressDesc(),transaction.getPastDueTime(),transaction.getStorageTime(),transaction.getPickupPwd(),transaction.getIsStandardsCompliant(),transaction.getNotStandardsCompliantCause(),transaction.getSenderId(),transaction.getAddresseeId(),transaction.getLastModifyTime(),transaction.getCloseTime(),transaction.getBoxId(),transaction.getTransType(),transaction.getBoxTransId(),transaction.getTotalAmount(),transaction.getSizeType(),transaction.getTransStatus(),transaction.getTransId()};
+		 jdbcTemplate.update(sql, values);
+	}
+	
+	public  void insert(Transaction transaction) throws Exception{
+		 String sql ="INSERT INTO T_TRANSACTION(TRANS_ID,TRANS_CODE,CREATE_TIME,USER_ID,SUPPLIER_ID,COURIER_ID,EXPRESS_DELIVERY_ID,EXPRESS_CODE,EXPRESS_DESC,PAST_DUE_TIME,STORAGE_TIME,PICKUP_PWD,IS_STANDARDS_COMPLIANT,NOT_STANDARDS_COMPLIANT_CAUSE,SENDER_ID,ADDRESSEE_ID,LAST_MODIFY_TIME,CLOSE_TIME,BOX_ID,TRANS_TYPE,BOX_TRANS_ID,TOTAL_AMOUNT,SIZE_TYPE,TRANS_STATUS) VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+		 Object[] values = new Object[] {transaction.getTransId(),transaction.getTransCode(),transaction.getCreateTime(),transaction.getUserId(),transaction.getSupplierId(),transaction.getCourierId(),transaction.getExpressDeliveryId(),transaction.getExpressCode(),transaction.getExpressDesc(),transaction.getPastDueTime(),transaction.getStorageTime(),transaction.getPickupPwd(),transaction.getIsStandardsCompliant(),transaction.getNotStandardsCompliantCause(),transaction.getSenderId(),transaction.getAddresseeId(),transaction.getLastModifyTime(),transaction.getCloseTime(),transaction.getBoxId(),transaction.getTransType(),transaction.getBoxTransId(),transaction.getTotalAmount(),transaction.getSizeType(),transaction.getTransStatus()};
+		 jdbcTemplate.update(sql, values);
+
+	}	
+	
+	public Transaction fetch(Map map) throws Exception{
+		Transaction transaction = new Transaction();		
+		transaction.setTransId((String)map.get("TRANS_ID"));
+		transaction.setTransCode((String)map.get("TRANS_CODE"));
+		Timestamp createTime = (Timestamp)map.get("CREATE_TIME");
+		if(null == createTime){
+			transaction.setCreateTime(null);
+		}else{
+			transaction.setCreateTime(new Timestamp(createTime.getTime()));
+		}
+		transaction.setUserId((String)map.get("USER_ID"));
+		transaction.setSupplierId((String)map.get("SUPPLIER_ID"));
+		transaction.setCourierId((String)map.get("COURIER_ID"));
+		transaction.setExpressDeliveryId((String)map.get("EXPRESS_DELIVERY_ID"));
+		transaction.setExpressCode((String)map.get("EXPRESS_CODE"));
+		transaction.setExpressDesc((String)map.get("EXPRESS_DESC"));
+		transaction.setPastDueTime(Integer.parseInt(map.get("PAST_DUE_TIME").toString()));
+		transaction.setStorageTime(Integer.parseInt(map.get("STORAGE_TIME").toString()));
+		transaction.setPickupPwd((String)map.get("PICKUP_PWD"));
+		transaction.setIsStandardsCompliant(Integer.parseInt(map.get("IS_STANDARDS_COMPLIANT").toString()));
+		transaction.setNotStandardsCompliantCause((String)map.get("NOT_STANDARDS_COMPLIANT_CAUSE"));
+		transaction.setSenderId((String)map.get("SENDER_ID"));
+		transaction.setAddresseeId((String)map.get("ADDRESSEE_ID"));
+		Timestamp lastModifyTime = (Timestamp)map.get("LAST_MODIFY_TIME");
+		if(null == lastModifyTime){
+			transaction.setLastModifyTime(null);
+		}else{
+			transaction.setLastModifyTime(new Timestamp(lastModifyTime.getTime()));
+		}
+		Timestamp closeTime = (Timestamp)map.get("CLOSE_TIME");
+		if(null == closeTime){
+			transaction.setCloseTime(null);
+		}else{
+			transaction.setCloseTime(new Timestamp(closeTime.getTime()));
+		}
+		transaction.setBoxId((String)map.get("BOX_ID"));
+		transaction.setTransType(Integer.parseInt(map.get("TRANS_TYPE").toString()));
+		transaction.setBoxTransId((String)map.get("BOX_TRANS_ID"));
+		transaction.setTotalAmount(Double.parseDouble(map.get("TOTAL_AMOUNT").toString()));
+		transaction.setSizeType(Integer.parseInt(map.get("SIZE_TYPE").toString()));
+		transaction.setTransStatus(Integer.parseInt(map.get("TRANS_STATUS").toString()));
+		return transaction;
+	}
+}

@@ -1,0 +1,14 @@
+#Tue Dec 10 15:38:38 CST 2013
+eclipse.preferences.version=1
+encoding//WebRoot/css/plat/pager.css=UTF-8
+encoding//WebRoot/js/calendar.js=UTF-8
+encoding//WebRoot/page/js/jquery-1.10.2.min.js=UTF-8
+encoding//WebRoot/page/js/map.js=UTF-8
+encoding//WebRoot/page/js/x_core.js=UTF-8
+encoding//WebRoot/page/login.jsp=UTF-8
+encoding//WebRoot/page/map.jsp=UTF-8
+encoding//docx/01\ \u9700\u6C42\u6587\u6863/init.sql=GBK
+encoding//docx/01\ \u9700\u6C42\u6587\u6863/initGB.sql=gbk
+encoding//inter-src/cn/com/xb/servlet/RootServlet.java=UTF-8
+encoding//inter-src/cn/com/xb/servlet/XBPhysicalBoxServlet.java=UTF-8
+encoding/<project>=UTF-8

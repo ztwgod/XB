@@ -1,0 +1,99 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <meta name="keywords" content="" />
+    <meta name="description" content="" />
+    <title>XB讯宝</title>
+    <link rel="stylesheet" href="css/menu.css" type="text/css" />
+    <style type="text/css">
+    td{
+		height:40px;
+		font-size:14px;
+	}
+	input{
+		height:25px;
+	}
+    </style>
+    <script src="js/jquery-1.4.2.js" type="text/javascript"></script>
+    <script src="js/menu.js" type="text/javascript"></script> 
+</head>
+<body>
+    <!-- 导航代码开始 -->
+    <div class="header">
+        <ul class="menu"><!-- class="current"-->
+            <li><a href="index.html">首页</a></li>
+            <li><a href="#">物箱查询</a></li>
+			  <li><a href="loadOrder.html">订单查询</a></li>
+			 
+            <li class="li_2"><a class="noclick" href="#" >用户管理</a>
+                <dl class="li_2_content">
+                    <dt></dt>
+                    <dd><a href="updateUserInfo.html" ><span>个人信息</span></a></dd>
+                    <dd><a href="updatePassword.html" ><span>修改密码</span></a></dd>
+                    <dd class="lastItem"><a href="updateMobile.html" ><span>修改手机号</span></a></dd>
+                </dl>
+            </li>		
+            
+            
+			<li class="li_3"><a class="noclick" href="#" >关于我们</a>
+                <dl class="li_3_content">
+                    <dt></dt>
+                    <dd><a href="#" ><span>白皮书</span></a></dd>
+                    <dd><a href="#" ><span>解决方案介绍</span></a></dd>
+                    <dd><a href="#" ><span>公司新闻</span></a></dd>
+					<dd><a href="#" ><span>业界新闻</span></a></dd>
+                    <dd class="lastItem"><a href="#" ><span>使用帮助</span></a></dd>
+                </dl>
+            </li>			
+          
+            <li class=""><a class="noborder " href="#">论坛</a></li>
+        </ul>
+        <a href="#"><img title="HOME" class="home_logo" src="images/logo.png" alt="网站logo" /></a>
+        <p class="language"><a href="login.html" >登陆</a><span>|</span><a href="register.html" >注册</a></p>
+    </div>
+	<!--代码结束 -->
+	
+	
+    <div style="margin:0 auto;width: 980px; font-size:12px; cursor:pointer; margin-top:5px;">
+        <a href="#">订单查询</a>
+    </div>
+   
+	 <div style="margin:0 auto; margin-top:30px;border:1px solid #CCC; width:980px;">     
+        <table style="margin-left:300px;">
+            <tr>
+            	<td>订单号：</td>
+                <td  align="left"><input type="text" id="order" name="order" /> </td>
+                <td style="padding-left:40px;">手机号：</td>
+                <td  align="left"><input type="text" id="mobile" name="mobile" /> </td>
+            </tr>          
+            <tr>
+            	<td colspan="4" align="right" ><input style="height:30px; width:60px;" type="button" id="searchBut" name="searchBut" value="查询" /> </td>
+            </tr>
+        </table>
+        
+        <div style="text-align:left; width:470px; border:1px solid #CCC; padding:10px; margin-top:5px; font-size:13px; margin-bottom:5px;margin-left:300px;">
+            订单号：000789909
+            <div style="color:#F00;">        	
+                2013-09-03 15:56:09 已经投入物箱等待快递员取件 <br />
+                2013-09-03 16:56:09 快递已经取走快递
+            </div>
+             <div>
+                2013-09-04 15:56:09 等待客户签收
+            </div>
+        </div>
+        
+        <div style="text-align:left; width:470px; border:1px solid #CCC; padding:10px;margin-top:5px;font-size:13px;margin-bottom:5px;margin-left:300px;">
+            订单号：000789919
+            <div style="color:#F00;">        	
+                2013-09-04 15:56:09 已经投入物箱等待快递员取件 <br />
+                2013-09-04 16:56:09 快递已经取走快递
+            </div>
+             <div>
+                2013-09-05 15:56:09 等待客户签收
+            </div>
+        </div>
+        
+   </div>
+</body>
+</html>

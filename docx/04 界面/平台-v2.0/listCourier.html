@@ -1,0 +1,319 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    <link href="css/css.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/ops.js" type="text/javascript"></script>
+     <script src="js/menu.js" type="text/javascript"></script>
+    <style type="text/css">
+	
+    </style>
+</head>
+<body>
+    <div class="row" style="margin-top: 10px;">
+		<img src="images/titile.gif" />
+    </div>
+    <div class="row">
+     <input type="hidden" value="user_menu_kdy" name="currMenu" id="currMenu" />
+        <!-- 菜单 -->
+		<div class="u-menu">
+            <ul class="u-nav" id="user_menu">
+            
+            	 <li class="item" id="user_menu_my" name="user_menu_my">
+                    <h3 class="t1">个人信息<a name="user_login"></a><span title="折叠"></span></h3>
+                    <ul class="sub">
+                        <li><a href="userIndex.html">个人主页</a></li>
+                    </ul>
+                </li>
+                
+                <li class="item" id="user_menu_manger" name="user_menu_manger">
+                    <h3 class="t1">用户管理<span title="折叠"></span></h3>
+                    <ul class="sub">
+                        <li><a href="listUser.html">用户信息</a></li>
+                        <li><a href="listRole.html">角色管理</a></li>
+                        <li><a href="listModule.html">模块管理</a></li>
+                    </ul>
+                </li>
+                
+                <li class="item" id="user_menu_box" name="user_menu_box">
+                    <h3 class="t1"> 物箱管理<span title="折叠"></span></h3>
+                    <ul class="sub">
+                         <li><a href="listBox.html">物箱</a></li>
+                         <li><a href="listBoxGroup.html">物箱组</a></li>
+                    </ul>
+                </li>
+                
+                
+                <li class="item" id="user_menu_kdy" name="user_menu_kdy">
+                    <h3 class="t1">快递员管理<span title="折叠"></span></h3>
+                    <ul class="sub">
+                       <li><a class="current" href="listCourier.html">快递员</a></li>
+                       <li><a href="listCourierGroup.html">快递员组</a></li>
+                    </ul>
+                </li>
+                
+                <li class="item" id="user_menu_kdgs" name="user_menu_kdgs">
+                    <h3 class="t1">快递公司管理<a name="user_login"></a><span title="折叠"></span></h3>
+                    <ul class="sub">
+                        <li><a href="listCourierCompanies.html">快递公司</a></li>
+                    </ul>
+                </li>
+                
+                <li class="item" id="user_menu_log" name="user_menu_log">
+                    <h3 class="t1">日志管理<a name="user_login"></a><span title="折叠"></span></h3>
+                    <ul class="sub">
+                        <li><a href="listLog.html">日志查询</a></li>
+                    </ul>
+                </li>
+                
+                <li class="item" id="user_menu_order" name="user_menu_order">
+                    <h3 class="t1">订单管理<a name="user_login"></a><span title="折叠"></span></h3>
+                    <ul class="sub">
+                        <li><a href="listOrder.html">订单查询</a></li>
+                    </ul>
+                </li>
+                <li class="item" id="user_menu_link" name="user_menu_link">
+                    <h3 class="t1">链接<a name="user_login"></a><span title="折叠"></span></h3>
+                    <ul class="sub">
+                        <li><a  href="#">门户首页</a></li>
+                    </ul>
+                </li>
+                
+            </ul>           
+        </div>
+        <!-- /.u-menu -->
+		<!-- 菜单 -->
+		
+        <div class="u-main">
+            <div class="ucenter-info mt10">
+                <div class="u-tab-wrap">
+                    <ul class="u-tab clearfix">
+                        <li  class="current"><a>快递员列表</a></li>
+                        <li><a>添加快递员</a></li>
+                    </ul>
+                    <!-- /.u-tab -->
+                </div>
+                
+                
+                <div id="tab-box">
+                    <div class="u-form-wrap" style="padding: 50px;">
+                    <!--  <div class="m-sub-til" style="padding: 0;"></div> -->                      
+                       <div class="search-box" style="margin-bottom: 15px; border:#ebebeb solid 1px;">
+                            <table class="tabSearch">
+                                <tr>
+                                    <td align="right">姓名：</td>
+                                    <td><input type="text"/></td>
+                                    <td align="right">身份证：</td>
+                                    <td><input type="text"/></td>
+                                </tr>
+                                 <tr>
+                                    <td align="right">手机号：</td>
+                                    <td><input type="text"/></td>
+                                    <td align="right">快递公司：</td>
+                                    <td>
+                                    	<select>
+                                        	<option>请选择</option>
+                                            <option>中通快递</option>
+                                            <option>顺风快递</option>
+                                        </select>
+                                    </td>
+                                </tr>
+                                
+                                 <tr>
+                                    <td align="right"></td>
+                                    <td>
+                                    	
+                                    </td>
+                                     <td></td>
+                                    <td align="left"><button id="do_search" class="search">查询</button></td>
+                                </tr>
+                            </table>
+                        </div>
+						
+						<table class="u-table">
+                            <tr>
+                                <th width="15%">
+                                    姓名
+                                </th>
+                                <th width="15%">
+                                    身份证
+                                </th>
+                                <th width="15%">
+                                    电话
+                                </th>
+                                <th width="15%">
+                                    用户组
+                                </th>
+                                <th width="15%">
+                                    快递公司
+                                </th>
+                                <th width="25px;">
+                                	操作
+                                </th>
+                            </tr>
+                            <tr>
+                                <td>
+                                	张三
+                                </td>
+                                <td>
+                                	4305811989232324242
+                                </td>
+                                <td>
+                                	13651678890
+                                </td>
+                                <td>
+                                	EMS金桥1组
+                                </td>
+                                <td>
+                                	EMS
+                                </td>
+                                <td>
+                                	<a href="updateCourier.html">修改</a>&nbsp;|&nbsp;<a href="#">删除</a>
+                                </td>
+                            </tr>
+                        </table>
+                         <span class="none">共0条记录</span> <span class="none">共0条记录</span> <span class="btn">首页</span>
+                        <a href="#" class="btn">首页</a> <a href="#" class="btn">上一页</a> <span class="btn">上一页</span>
+                        <span class="current"></span><a href="#"></a><a href="#" class="btn">下一页</a> <span
+                            class="btn">下一页</span>&nbsp; <a href="#" class="btn">尾页</a> <span class="btn">尾页</span>
+                        <span class="pageinp" title="回车跳转">直达
+                            <input type="text" id="pageinp" />
+                            页 </span><span class="none">共0页</span> <span class="none">共{0}页</span>
+						
+                    </div>
+                    <div class="u-form-wrap" style="padding: 50px; display: none;">
+				<table border="0" cellpadding="2" class="newTab" cellspacing="1" style="width:80%" align="center">
+					  <tr>
+                        <td align="right" >姓名：</td>
+					    <td width="420px;">
+                        	<input type="text" id="groupName" name="groupName" />
+                        </td>
+					  </tr>
+                      
+                      <tr>
+                        <td align="right" >性别：</td>
+					    <td>
+                        	<input style="width:20px;" type="radio" id="sex" name="sex" />男
+                            <input style="width:20px;" type="radio" id="sex" name="sex" />女
+                        </td>
+					  </tr>
+                    
+                    <tr>
+                        <td align="right" >状态：</td>
+					    <td>
+                        	<select id="status" name="status">
+                            	<option>请选择</option>
+                                <option>激活</option>
+                                <option>禁用</option>
+                            </select>
+                        </td>
+					  </tr>
+                      
+                      <tr>
+                        <td align="right" >身份证：</td>
+					    <td>
+                        	<input type="text" />
+                        </td>
+					  </tr>
+                      
+                       <tr>
+                        <td align="right" >电话：</td>
+					    <td>
+                        	<input type="text" />
+                        </td>
+					  </tr>
+                      
+                      <tr>
+                        <td align="right" >快递公司：</td>
+					    <td>
+                        	<select id="status" name="status">
+                            	<option>请选择</option>
+                                <option>EMS</option>
+                                <option>中通快递</option>
+                            </select>
+                        </td>
+					  </tr>
+                      
+                      <tr>
+                        <td align="right" >所属地区：</td>
+					    <td>
+                        	<select id="status" name="status">
+                            	<option>请选择</option>
+                                <option>上海市</option>
+                                <option>北京市</option>
+                            </select>
+                        </td>
+					  </tr>
+                    
+                    
+                    <tr>
+                        <td align="right" >用户组：</td>
+					    <td>
+                        	<select id="status" name="status">
+                            	<option>请选择</option>
+                                <option>中通金桥1组</option>
+                                <option>中通金桥2组</option>
+                            </select>
+                        </td>
+					  </tr>
+                      
+                       <tr>
+                        <td align="right" >电子快照：</td>
+					    <td>
+                        	<input type="file" />
+                        </td>
+					  </tr>
+                      
+                      <tr>
+                        <td align="right" >身份证：</td>
+					    <td>
+                        	<input type="file" />
+                        </td>
+					  </tr>
+                      <tr>
+                        <td align="right" >&nbsp;</td>
+					    <td>
+                        	<input type="file" />
+                        </td>
+					  </tr>
+                      
+                      <tr>
+                        <td align="right" >户籍地址：</td>
+					    <td>
+                        	<input type="text" />
+                        </td>
+					  </tr>
+                      
+                       <tr>
+                        <td align="right" >常驻地址：</td>
+					    <td>
+                        	<input type="text" />
+                        </td>
+					  </tr>
+                      
+                      <tr>
+                        <td align="right" ></td>
+					    <td>
+                        	<button id="do_search" class="search">添加</button>
+                        </td>
+					  </tr>
+                    
+				</table>
+			 <br />
+				</fieldset>
+           </TD>
+		</TR>
+		
+		</TABLE>                     
+                    </div>
+                </div>
+            </div>
+           
+        </div>
+        <!-- /.u-main -->
+    </div>
+    <!-- /.row -->
+</body>
+</html>

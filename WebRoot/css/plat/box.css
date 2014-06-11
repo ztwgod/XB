@@ -1,0 +1,76 @@
+.boxTable {
+	text-align: left;
+	border:1px solid #FFF;
+}
+
+.boxTable tr td{
+	border-color: #FFF;
+	padding-left:3px;
+}
+
+#_mianBox tr td {
+	border-top: 1px solid #FFF;
+	border-bottom: 1px solid #FFF;
+}
+
+.box-main {
+	margin-top: 5px;
+	margin: 0 auto;
+	border: 1px solid #c9c9c9;
+	height: 100%;
+}
+
+.box-title {
+	height: 35px;
+	margin-bottom: 5px;
+	padding-left: 5px;
+	text-align: left;
+	line-height: 35px;
+	vertical-align: middle;
+	font-size: 14px;
+	font-weight: bold;
+	width: 100%;
+	color: #FF9d02;
+	border-bottom: 1px solid #EBEBEB;
+}
+
+.box-content {
+	width: 100%;
+	margin-left: 20px;
+	margin-top: 20px;
+}
+
+/*主控柜样式*/
+._main-close{ /*断链*/
+	background: #F5DEB3;
+}
+
+._main-error{/*故障*/
+	background: #FFB6C1;
+}
+
+._main-normal{/*正常*/
+	background: #00FF7F;
+}
+
+
+/*根据物箱不同的状态显示不同的背景灯*/
+._idle { /*空闲*/
+	background: #ccFFFF;
+}
+
+._extended { /*弃件（占用超期）*/
+	background: #FFCCCC;
+}
+
+._timeout { /*占用超时*/
+	background: #FFFF99;
+}
+
+._occupation { /*占用*/
+	background: #FFCC99;
+}
+
+._undefined { /*暂时未获取到状态*/
+	background: #ccccff;
+}

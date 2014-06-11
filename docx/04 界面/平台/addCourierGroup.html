@@ -1,0 +1,128 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>XB平台子系统</title>
+<link rel="stylesheet" rev="stylesheet" href="css/style.css" type="text/css" media="all" />
+<script language="JavaScript" type="text/javascript">
+
+
+</script>
+<style type="text/css">
+<!--
+.atten {font-size:12px;font-weight:normal;color:#F00;}
+-->
+</style>
+</head>
+
+<body class="ContentBody">
+  <form action="" method="post" name="fom" id="fom" target="sypost" >
+<div class="MainDiv">
+<table width="99%" border="0" cellpadding="0" cellspacing="0" class="CContent">
+  <tr>
+      <th class="tablestyle_title" >添加快递员组</th>
+  </tr>
+  <tr>
+    <td class="CPanel">
+		
+		<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+		<tr><td align="left">
+		<input type="button" name="Submit" value="添加" class="button" onclick="alert('添加');"/>　
+			
+			<input type="button" name="Submit2" value="返回" class="button" onclick="window.history.go(-1);"/>
+		</td></tr>
+
+		<TR>
+			<TD width="100%">
+				<fieldset style="height:100%;">
+				<legend>添加快递员组</legend>
+					  <table border="0" cellpadding="2" cellspacing="1" style="width:80%" align="center">
+					 
+					  <tr>
+					    <td align="right" width="32%">快递公司:</td>
+					    <td align="left" width="16%">
+                        	<select id="status" name="status">
+                            	<option value="">请选择</option>
+                                <option value="1">EMS</option>
+                                <option value="2">中通快递</option>
+                            </select>
+                        </td>
+                        <td align="right" width="13%">所属地区：</td>
+					    <td>
+                        	<select id="status" name="status">
+                            	<option value="">请选择</option>
+                                <option value="1">上海市</option>
+                                <option value="2">北京市</option>
+                            </select>
+                        </td>
+                      
+					  </tr>
+                      
+                     <tr>
+					      <td align="right">组名称：</td>
+                          <td><input type="text" id="groupName" name="groupName" /> </td>
+                         
+                         <td align="right">类型：</td>
+                         <td>
+                            <select id="status" name="status" >
+                                <option value="" selected="selected">请选择</option>
+                                <option value="1">派件</option>
+                                <option value="2">取件</option>
+                            </select>
+           				 </td>
+					  </tr>
+                      
+                      <tr>
+                        <td align="right">物箱组列表：</td>
+                        <td><input class="pur" type="checkbox"  name="purview" value="1" />物箱1组</td>
+                        <td><input class="pur" type="checkbox"  name="purview" value="1" />物箱2组</td>
+                        <td><input class="pur" type="checkbox"  name="purview" value="1" />物箱3组</td>
+					  </tr>
+                      <tr>
+                        <td align="right"></td>
+                        <td><input class="pur" type="checkbox"  name="purview" value="1" />物箱1组</td>
+                        <td><input class="pur" type="checkbox"  name="purview" value="1" />物箱2组</td>
+                        <td><input class="pur" type="checkbox"  name="purview" value="1" />物箱3组</td>
+					  </tr>
+                      <tr>
+                        <td align="right"></td>
+                        <td><input class="pur" type="checkbox"  name="purview" value="1" />物箱1组</td>
+                        <td><input class="pur" type="checkbox"  name="purview" value="1" />物箱2组</td>
+                        <td><input class="pur" type="checkbox"  name="purview" value="1" />物箱3组</td>
+					  </tr>
+                      <tr>
+                        <td align="right"></td>
+                        <td><input class="pur" type="checkbox"  name="purview" value="1" />物箱1组</td>
+                        <td><input class="pur" type="checkbox"  name="purview" value="1" />物箱2组</td>
+                        <td><input class="pur" type="checkbox"  name="purview" value="1" />物箱3组</td>
+					  </tr>
+                      
+				</table>
+			 <br />
+				</fieldset>
+           </TD>
+		</TR>
+		
+		</TABLE>
+	
+	
+	 </td>
+  </tr>
+		
+		<TR>
+			<TD colspan="2" align="center" height="50px">
+			<input type="button" name="Submit" value="添加" class="button" onclick="link();"/>　
+			
+			<input type="button" name="Submit2" value="返回" class="button" onclick="window.history.go(-1);"/></TD>
+		</TR>
+		</TABLE>
+	
+	
+	 </td>
+  </tr>
+  </table>
+
+</div>
+</form>
+</body>
+</html>

@@ -1,0 +1,129 @@
+﻿<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>自定义多级右键菜单</title>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/box.js"></script>
+<script type="text/javascript" src="js/tipswindown.js"></script>
+<link href="css/tipswindown.css" rel="stylesheet" type="text/css" />
+<link href="css/box.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+<div id="rightMenu">
+    <ul>
+        <li>
+            操作
+            <ul>
+                <li class="nav">同步</li>
+            </ul>
+        </li>
+		
+        <li>
+            配置
+            <ul>
+                <li class="nav">设置收件快递员</li>
+                <li class="nav">设置投件快递员</li>
+                <li class="nav">设置维护员</li>
+            </ul>
+        </li>
+		
+		<li>
+            查询
+            <ul>
+                <li class="nav">物箱状态</li>
+                <li class="nav">外围设备状态</li>
+				<li id="last" class="nav">箱子状态</li>
+            </ul>
+        </li>
+		
+		<li class="lastLi">
+            操作
+            <ul>
+                <li class="nav">开箱</li>
+                <li class="nav">维修密码发送</li>
+                <li class="nav">开箱密码重发</li>
+            </ul>
+        </li>
+		
+    </ul>
+</div>
+<div style="background:url(images/nav04.gif); height:60px; padding-left:20px;"><br />
+	物箱代码：2001001
+</div>
+
+<!-- dailog start -->
+<div id="BgDiv"></div> <!-- 大的背景层 -->
+<div id="DialogDiv" style="display:none">
+<h2><a href="#" id="btnClose">关闭</a></h2>
+    <div class="form"></div>
+</div>
+<!-- dailog end -->
+
+<div>
+<table class="dataintable">
+	<tr>
+	   <td id="box_1"></td>
+	   <td id="box_2"></td>
+	   <td id="Mainbox" rowspan="10"></td>
+	   <td id="box_3"></td>
+	   <td id="box_4"></td>
+	</tr>
+	<tr>
+	   <td id="box_5"></td>
+	   <td id="box_6"></td>
+	   <td id="box_7"></td>
+	   <td id="box_8"></td>
+	</tr>
+	<tr>
+	   <td id="box_9"></td>
+	   <td id="box_10"></td>
+	   <td id="box_11"></td>
+	   <td id="box_12"></td>
+	</tr>
+	<tr>
+	   <td id="box_13"></td>
+	   <td id="box_14"></td>
+	   <td id="box_15"></td>
+	   <td id="box_16"></td>
+	</tr>
+	<tr>
+	   <td id="box_17"></td>
+	   <td id="box_18"></td>
+	   <td id="box_19"></td>
+	   <td id="box_20"></td>
+	</tr>
+	<tr>
+	   <td id="box_21"></td>
+	   <td id="box_22"></td>
+	   <td id="box_23"></td>
+	   <td id="box_24"></td>
+	</tr>
+	<tr>
+	   <td id="box_25"></td>
+	   <td id="box_26"></td>
+	   <td id="box_27"></td>
+	   <td id="box_28"></td>
+	</tr>
+	<tr>
+	   <td id="box_29"></td>
+	   <td id="box_30"></td>
+	   <td id="box_31"></td>
+	   <td id="box_32"></td>
+	</tr>
+	<tr>
+	   <td id="box_33"></td>
+	   <td id="box_34"></td>
+	   <td id="box_35"></td>
+	   <td id="box_36"></td>
+	</tr>
+	<tr>
+	   <td id="box_37"></td>
+	   <td id="box_38"></td>
+	   <td id="box_39"></td>
+	   <td id="box_40"></td>
+	</tr>
+</table>
+</div>
+</body>
+</html>

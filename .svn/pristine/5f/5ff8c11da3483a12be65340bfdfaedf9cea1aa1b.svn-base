@@ -1,0 +1,303 @@
+package cn.com.xb.http.comet;
+
+import java.io.IOException;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.catalina.CometEvent;
+import org.apache.catalina.CometProcessor;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import cn.com.xb.domain.base.ResponseText;
+import cn.com.xb.domain.base.StoragestationIntfLog;
+import cn.com.xb.inter.util.GUIMessageUtil;
+import cn.com.xb.service.InterfaceLogService;
+import cn.com.xb.util.Global;
+import cn.com.xb.util.KeyHelper;
+import cn.com.xb.util.SpringTool;
+
+
+public class TomcatHttpServlet extends HttpServlet implements CometProcessor {
+
+	private static final long serialVersionUID = -3667180332947986301L;
+	protected static Map<String, HttpServletResponse> connections = new ConcurrentHashMap<String, HttpServletResponse>();//<物箱Code,长连接>
+	private static Map<String, ResponseText> resultMaps = new ConcurrentHashMap<String, ResponseText>(); //已经发送请求个物箱，但是还未收到处理结果的交易请求
+	private final static Integer TIME_OUT = 60*1000*5;
+	private static Log log = LogFactory.getLog(TomcatHttpServlet.class);
+	private static MessageSender sender;
+	
+	static{
+		sender = new MessageSender();
+		Thread messageSenderThread = new Thread(sender, "MessageSender");
+		messageSenderThread.setDaemon(true);
+		messageSenderThread.start();
+	}
+
+	public void init() throws ServletException {
+		super.init();
+	}
+
+
+	public void destroy() {
+		connections.clear(); //销毁所有长连接
+	}
+	
+	/**
+	 * 判断指定物箱长连接是否存在
+	 * @param ssCode
+	 * @return
+	 */
+	public static boolean isContainsConnection(String ssCode){
+		return connections.containsKey(ssCode);
+	}
+	
+	//当交易信息收到结果时调用此方法，将交易信息移除待处理队列中
+	public static void removeResultMaps(String key){
+		resultMaps.remove(key);
+	}
+	//根据序号获取到其请求对象
+	public static ResponseText getResultMapsValue(String key){
+		return resultMaps.get(key);
+	}
+	
+	//是否包含指定的SSid
+	public static boolean isContainsKey(String seqNumber){
+		return resultMaps.containsKey(seqNumber);
+	}
+	
+	public static void put(ResponseText responseText){
+		resultMaps.put(responseText.getTransNo(), responseText);
+	}
+
+	public void event(CometEvent event) throws IOException, ServletException {
+		HttpServletRequest request = event.getHttpServletRequest();
+		HttpServletResponse response = event.getHttpServletResponse();		
+		String ssCode = request.getParameter("ssCode")==null?"":request.getParameter("ssCode"); //物箱ID
+		
+		log.info("ssCode:"+ssCode);
+		if ("".equals(ssCode)){
+			event.close();
+			return;
+		}
+		
+		if (event.getEventType() == CometEvent.EventType.BEGIN) {			
+			event.setTimeout(TIME_OUT); // Http连接空闲超时
+			log.info("Begin for session: " + request.getSession(true).getId());
+			connections.put(ssCode, response);
+		} else if (event.getEventType() == CometEvent.EventType.ERROR) {
+			log.info("Error for session: " + request.getSession(true).getId());
+			connections.remove(ssCode);
+			event.close();
+		} else if (event.getEventType() == CometEvent.EventType.END) {
+			log.info("End for session: " + request.getSession(true).getId());
+			connections.remove(ssCode);
+			event.close();
+		} else if (event.getEventType() == CometEvent.EventType.READ) {
+			log.info("READ for session: " + request.getSession(true).getId());		
+		}
+	}
+
+	
+	
+	public static String[] send(ResponseText resText,HttpServletRequest request){
+		String [] result = null;
+		try {
+			String sendMessage = new GUIMessageUtil().getMessage(resText,request);
+
+			// 添加接口日志
+			InterfaceLogService ilService = (InterfaceLogService) SpringTool.getBean(request,"interfaceLogService");
+			StoragestationIntfLog sil = new StoragestationIntfLog();
+			sil.setLogId(KeyHelper.creatKey());
+			sil.setLogTime(new Timestamp(new Date().getTime()));
+			sil.setMsgContent(sendMessage);
+			ilService.addInterfaceLogInfo(Global.XB_GUI, Global.INTF_DOWN, sil);
+			
+			//消息加入到消息队列
+			sender.send("3@"+sendMessage);
+			
+			log.info("success "+sendMessage);
+			result = new String[]{"1","OK"};
+		} catch (Exception e) {
+			result = new String[]{"-1",e.getMessage()};
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static String[] sendAppOpenBox(String message,HttpServletRequest request){
+		String [] result = null;
+		try {
+			// 添加接口日志
+			InterfaceLogService ilService = (InterfaceLogService) SpringTool.getBean(request,"interfaceLogService");
+			StoragestationIntfLog sil = new StoragestationIntfLog();
+			sil.setLogId(KeyHelper.creatKey());
+			sil.setLogTime(new Timestamp(new Date().getTime()));
+			sil.setMsgContent(message);
+			ilService.addInterfaceLogInfo(Global.XB_APP, Global.INTF_DOWN, sil);
+			
+			//消息加入到消息队列
+			sender.send("1@"+message);
+			
+			log.info("success： "+message);
+			result = new String[]{"1","OK"};
+		} catch (Exception e) {
+			result = new String[]{"-1",e.getMessage()};
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public static String[] sendOpenBox(String message,HttpServletRequest request){
+		String [] result = null;
+		try {
+			// 添加接口日志
+			InterfaceLogService ilService = (InterfaceLogService) SpringTool.getBean(request,"interfaceLogService");
+			StoragestationIntfLog sil = new StoragestationIntfLog();
+			sil.setLogId(KeyHelper.creatKey());
+			sil.setLogTime(new Timestamp(new Date().getTime()));
+			sil.setMsgContent(message);
+			ilService.addInterfaceLogInfo(Global.XB_APP, Global.INTF_DOWN, sil);
+			
+			//消息加入到消息队列
+			sender.send("2@"+message);
+			
+			log.info("success： "+message);
+			result = new String[]{"1","OK"};
+		} catch (Exception e) {
+			result = new String[]{"-1",e.getMessage()};
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	// 向某个连接发送消息
+	/*public static String[] send(ResponseText resText,HttpServletRequest request){
+		String [] result = null;
+		HttpServletResponse response = connections.get(resText.getSsCode());
+		if(null == response){
+			log.info("response is null send Message Fail...");
+			result = new String[]{"-1","response is Null."};
+			return result;			
+		}
+		PrintWriter writer;
+		try {
+			String sendMessage = new GUIMessageUtil().getMessage(resText,request);
+
+			// 添加接口日志
+			InterfaceLogService ilService = (InterfaceLogService) SpringTool.getBean(request,"interfaceLogService");
+			StoragestationIntfLog sil = new StoragestationIntfLog();
+			sil.setLogId(KeyHelper.creatKey());
+			sil.setLogTime(new Timestamp(new Date().getTime()));
+			sil.setMsgContent(sendMessage);
+			ilService.addInterfaceLogInfo(Global.XB_GUI, Global.INTF_DOWN, sil);
+			
+			writer = response.getWriter();
+			writer.println(sendMessage);//发送消息
+			writer.flush();
+			writer.close();
+			resultMaps.put(resText.getTransNo(),resText);//将response交易存入待处理队列中，等到下次接收到该请求结果时再拿出来处理。
+			log.info("success "+sendMessage);
+			result = new String[]{"1","OK"};
+		} catch (Exception e) {
+			result = new String[]{"-1",e.getMessage()};
+			e.printStackTrace();
+		}
+		return result;
+	}*/
+	
+	
+	//
+	/*public static String[] sendAppOpenBox(String message,HttpServletRequest request){
+		String [] result = null;
+		RemoteUnpackeInfoWarpper remote = (RemoteUnpackeInfoWarpper)XstreamUtil.JETTSON2JavaBean(message, RemoteUnpackeInfoWarpper.class);
+		HttpServletResponse response = connections.get(remote.getStorageStationId());
+		if(null == response){
+			log.info("失败，物箱链接已断开请稍后重试！"+remote.getStorageStationId());
+			result = new String[]{"-1","失败，物箱链接已断开请稍后重试！"};
+			return result;			
+		}
+		PrintWriter writer;
+		try {
+
+			// 添加接口日志
+			InterfaceLogService ilService = (InterfaceLogService) SpringTool.getBean(request,"interfaceLogService");
+			StoragestationIntfLog sil = new StoragestationIntfLog();
+			sil.setLogId(KeyHelper.creatKey());
+			sil.setLogTime(new Timestamp(new Date().getTime()));
+			sil.setMsgContent(message);
+			ilService.addInterfaceLogInfo(Global.XB_APP, Global.INTF_DOWN, sil);
+			
+			writer = response.getWriter();
+			writer.println(message);//发送消息
+			writer.flush();
+			writer.close();
+			
+			ResponseText resText = new ResponseText();
+			resText.setSsCode(remote.getStorageStationId());
+			resText.setTransNo(remote.getGuiSequenceNumber());
+			
+			//resText.setSsId(ssId);
+			//resText.setResponseType(Global.BOX_GUI_RESPONSETYPE_SYN); //同步
+			
+			resultMaps.put(remote.getGuiSequenceNumber(),resText);//将response交易存入待处理队列中，等到下次接收到该请求结果时再拿出来处理。
+			log.info("success： "+message);
+			result = new String[]{"1","OK"};
+		} catch (Exception e) {
+			result = new String[]{"-1",e.getMessage()};
+			e.printStackTrace();
+		}
+		return result;
+	}*/
+	
+	// 向某个连接发送消息
+	/*public static String[] sendOpenBox(String message,HttpServletRequest request){
+		String [] result = null;
+		DepositUnpackInfoWarpper remote = (DepositUnpackInfoWarpper)XstreamUtil.JETTSON2JavaBean(message, DepositUnpackInfoWarpper.class);
+		HttpServletResponse response = connections.get(remote.getStorageStationId());
+		if(null == response){
+			log.info("失败，物箱链接已断开请稍后重试！"+remote.getStorageStationId());
+			result = new String[]{"-1","失败，物箱链接已断开请稍后重试！"};
+			return result;			
+		}
+		PrintWriter writer;
+		try {
+
+			// 添加接口日志
+			InterfaceLogService ilService = (InterfaceLogService) SpringTool.getBean(request,"interfaceLogService");
+			StoragestationIntfLog sil = new StoragestationIntfLog();
+			sil.setLogId(KeyHelper.creatKey());
+			sil.setLogTime(new Timestamp(new Date().getTime()));
+			sil.setMsgContent(message);
+			ilService.addInterfaceLogInfo(Global.XB_APP, Global.INTF_DOWN, sil);
+			
+			writer = response.getWriter();
+			writer.println(message);//发送消息
+			writer.flush();
+			writer.close();
+			
+			ResponseText resText = new ResponseText();
+			resText.setSsCode(remote.getStorageStationId());
+			resText.setTransNo(remote.getGuiSequenceNumber());
+			
+			//resText.setSsId(ssId);
+			//resText.setResponseType(Global.BOX_GUI_RESPONSETYPE_SYN); //同步
+			
+			resultMaps.put(remote.getGuiSequenceNumber(),resText);//将response交易存入待处理队列中，等到下次接收到该请求结果时再拿出来处理。
+			log.info("success： "+message);
+			result = new String[]{"1","OK"};
+		} catch (Exception e) {
+			result = new String[]{"-1",e.getMessage()};
+			e.printStackTrace();
+		}
+		return result;
+	}*/
+	
+}

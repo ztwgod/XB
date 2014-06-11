@@ -1,0 +1,109 @@
+package cn.com.xb.servlet;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import cn.com.xb.http.comet.TomcatHttpServlet;
+import cn.com.xb.inter.domain.request.RemoteUnpackeInfoWarpper;
+import cn.com.xb.inter.domain.response.AppOpenBoxResult;
+import cn.com.xb.inter.domain.response.BaseResponse;
+import cn.com.xb.inter.service.XBProcessServer;
+import cn.com.xb.inter.util.AppResponseUtil;
+import cn.com.xb.inter.util.XBProcessFactory;
+import cn.com.xb.util.Global;
+import cn.com.xb.util.XstreamUtil;
+
+public class XBPhysicalBoxServlet extends RootServlet {
+
+	private static final long serialVersionUID = 1L;
+	private Log log = LogFactory.getLog(XBPhysicalBoxServlet.class);
+
+	/**
+	 * XB平台接口总入口
+	 * @throws Exception 
+	 */
+	public void process(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		request.setCharacterEncoding("UTF-8");
+		//response.setCharacterEncoding("UTF-8");
+		response.setContentType("text/html;charset=UTF-8");
+		String applyCode = request.getParameter("applyCode")==null?"":request.getParameter("applyCode"); //接口ID
+		String message = request.getParameter("MSG")==null?"":request.getParameter("MSG"); //报文
+		XBProcessServer xbProcessServer = XBProcessFactory.create(applyCode,request);
+		if(null==xbProcessServer){
+			BaseResponse result = new BaseResponse();
+			result.setErrorMsg("applyCode错误，未查到对应的接口！");
+			result.setResultStatus(Global.XB_INTER_FAIL);
+			String jsonMsg = XstreamUtil.javaBean2JETTSON(result, BaseResponse.class);
+			super.writeOut(request, response, jsonMsg);
+		}else{
+			String result = xbProcessServer.process(message);
+			if(applyCode.equals(Global.XB_013)){//如果是APP请求开箱需要特殊处理，这里不是返回结果给APP而是将请求转换给指定的物箱
+				String[] arr = TomcatHttpServlet.sendAppOpenBox(result, request);//发送一个开箱请求到指定物箱
+				if(null==arr){
+					AppOpenBoxResult _result = new AppOpenBoxResult();
+					_result.setErrorMsg("系统异常！");
+					_result.setResultStatus(Global.XB_INTER_FAIL);
+	        		String jsonMsg = XstreamUtil.javaBean2JETTSON(_result, AppOpenBoxResult.class);
+	        		super.writeOut(request, response, jsonMsg);
+				}else{
+					if(arr[0].equals("1")){
+						RemoteUnpackeInfoWarpper remote = (RemoteUnpackeInfoWarpper)XstreamUtil.JETTSON2JavaBean(result, RemoteUnpackeInfoWarpper.class);
+						getResponse(remote.getGuiSequenceNumber(), request, response);
+					}else{
+						AppOpenBoxResult _result = new AppOpenBoxResult();
+						_result.setErrorMsg("系统异常！");
+						_result.setResultStatus(Global.XB_INTER_FAIL);
+		        		String jsonMsg = XstreamUtil.javaBean2JETTSON(_result, AppOpenBoxResult.class);
+		        		super.writeOut(request, response, jsonMsg);
+					}
+				}
+			}else{
+				super.writeOut(request, response, result);
+			}
+		}
+	}
+	
+	/**
+	 * 获取反馈结果
+	 * @param key
+	 * @param response
+	 * @param result
+	 */
+	private void getResponse(String key, HttpServletRequest request, HttpServletResponse response){ //synchronized
+		int i = 0;
+	    while(true) {
+	        try {
+	        	if(i>120){ //1分钟后无响应结果断定为请求超时
+	        		AppOpenBoxResult result = new AppOpenBoxResult();
+	        		result.setErrorMsg("请求超时！");
+	        		result.setResultStatus(Global.XB_INTER_FAIL);
+	        		String jsonMsg = XstreamUtil.javaBean2JETTSON(result, AppOpenBoxResult.class);
+	        		super.writeOut(request, response, jsonMsg);
+	        		break;
+	        	}
+	        	String value = AppResponseUtil.getValue(key);
+	        	log.info("value:"+value+",i="+i);
+	        	if(null!=value){
+	        		super.writeOut(request, response, value);
+	        		AppResponseUtil.removeValue(key);
+	        		break;
+	        	}else{
+	        		 //wait(500);
+	        		 Thread.sleep(500);
+	        	}
+	        	i++;
+	        } catch(InterruptedException e) {
+	        	AppOpenBoxResult result = new AppOpenBoxResult();
+        		result.setErrorMsg("系统异常！");
+        		result.setResultStatus(Global.XB_INTER_FAIL);
+        		String jsonMsg = XstreamUtil.javaBean2JETTSON(result, AppOpenBoxResult.class);
+        		super.writeOut(request, response, jsonMsg);
+	        	log.error(e);
+	        	break;
+	        }
+	    }
+	}
+}

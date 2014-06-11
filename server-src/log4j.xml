@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j='http://jakarta.apache.org/log4j/'>
+	<appender name="CONSOLE" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="[%d{yyyy-MM-dd HH:mm:ss.SSS} %p] (%c)%n%m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">    
+		   <param name="levelMin" value="INFO" />    
+		   <param name="levelMax" value="INFO" />   
+		</filter> 
+	</appender>
+	
+	<appender name="LOG.DEBUG" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/XB/logs/debug.log" />
+		<param name="Append" value="true" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"	value="[%d{yyyy-MM-dd HH:mm:ss.SSS} %p] (%c)%n%m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="DEBUG" />
+			<param name="LevelMax" value="FATAL" />
+		</filter>
+	</appender>
+	
+	<appender name="LOG.INFO" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/XB/logs/info.log" />
+		<!-- 设置是否在重新启动服务时，在原有日志的基础添加新日志 -->
+		<param name="Append" value="true" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"	value="[%d{yyyy-MM-dd HH:mm:ss.SSS} %p] (%c)%n%m%n" />
+		</layout>
+		<!--过滤器设置输出的级别-->  
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="INFO" />
+			<param name="LevelMax" value="FATAL" />
+		</filter>
+	</appender>
+	
+	<appender name="LOG.ERROR" class="org.apache.log4j.DailyRollingFileAppender">
+		<param name="File" value="/XB/logs/error.log" />
+		<param name="Append" value="true" />
+		<param name="DatePattern" value="'.'yyyy-MM-dd" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern"	value="[%d{yyyy-MM-dd HH:mm:ss.SSS} %p] (%c)%n%m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="ERROR" />
+			<param name="LevelMax" value="FATAL" />
+		</filter>
+	</appender>
+	
+	<root>
+		<!-- <appender-ref ref="LOG.DEBUG" /> -->
+		<appender-ref ref="LOG.INFO" />
+		<appender-ref ref="LOG.ERROR" />
+		<appender-ref ref="CONSOLE" />
+	</root>
+	
+</log4j:configuration>

@@ -1,0 +1,269 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+			
+		<!-- 用户管理 -->
+		<bean name="/plat/listUser,
+					/plat/toAddUser,
+					/plat/doAddUser,
+					/plat/checkUserAccount,
+					/plat/toUpdateUser,
+					/plat/doUpdateUser,
+					/plat/doDelete,
+					/plat/doPlatLogin,
+					/plat/logout,
+					/plat/Admin,
+					/plat/toUserHome,
+					/plat/doUpdatePlatPassword,
+					/plat/toUpdatePlatPassword,
+					/plat/checkPlatOldPasswod,
+					/plat/doUpdatePlatUserInfo,
+					/plat/toMain" 
+					
+					class="cn.com.xb.plat.action.PlatUserAction">
+			<property name="userService">
+				<ref bean="userService"/>
+			</property>
+			<property name="flagDictionaryService">
+				<ref bean="flagDictionaryService"/>
+			</property>
+			<property name="roleService">
+				<ref bean="roleService"/>
+			</property>
+			<property name="userRoleService">
+				<ref bean="userRoleService"/>
+			</property>
+			<property name="moduleService">
+				<ref bean="moduleService"/>
+			</property>
+		</bean>
+
+		
+		<!-- 模块管理 -->
+		<bean name="/plat/listModule,
+					/plat/toAddModule,
+					/plat/doAddModule,
+					/plat/doDeleteModule,
+					/plat/toUpdateModule,
+					/plat/doUpdateModule,
+					/plat/verifyModuleCode" 
+					class="cn.com.xb.plat.action.ModuleAction">
+			<property name="moduleService">
+				<ref bean="moduleService"/>
+			</property>
+			<property name="flagDictionaryService">
+				<ref bean="flagDictionaryService"/>
+			</property>
+		</bean>
+		
+	<!-- 卡片管理 -->
+		<bean name="/plat/listCard,
+					/plat/toAddCard,
+					/plat/doAddCard,
+					/plat/doUpdateCard,
+					/plat/toUpdateCard" 
+				
+				class="cn.com.xb.plat.action.AuthCardAction">		
+			<property name="authCardService">
+				<ref bean="authCardService"/>
+			</property>
+			<property name="flagDictionaryService">
+				<ref bean="flagDictionaryService"/>
+			</property>
+		</bean>
+		
+		<!-- 物箱管理 -->
+		<bean name="/plat/listBox,
+					/plat/toAddBox,
+					/plat/listEgis,
+					/plat/doAddBox,
+					/plat/doUpdateBox,
+					/plat/toUpdateBox,
+					/plat/doDeleteBox,
+					/plat/loadBox,
+					/plat/verifyBaiDuPid,
+					/plat/verifySSCode" 
+				class="cn.com.xb.plat.action.StoragestationaAction">
+			
+			<property name="userService">
+				<ref bean="userService"/>
+			</property>
+			<property name="flagDictionaryService">
+				<ref bean="flagDictionaryService"/>
+			</property>
+			<property name="storagestationaService">
+				<ref bean="storagestationaService"/>
+			</property>
+		</bean>
+		
+		<!-- 物箱组管理 -->
+		<bean name="/plat/listBoxGroup,
+					/plat/toAddBoxGroup,
+					/plat/doAddBoxGroup,
+					/plat/toUpdateBoxGroup,
+					/plat/doUpdateBoxGroup,
+					/plat/verifyGroupCode,
+					/plat/doDeleteBoxGroup"			
+			class="cn.com.xb.plat.action.StoragestationaGroupAction">		
+			<property name="gbDistrictService">
+				<ref bean="gbDistrictService"/>
+			</property>
+			<property name="storagestationaService">
+				<ref bean="storagestationaService"/>
+			</property>
+			<property name="locationServer">
+				<ref bean="locationServer"/>
+			</property>
+		</bean>
+		
+		<!-- 物箱GUI管理 -->
+		<bean name="/plat/loadGUIBox,
+					/plat/synchronizedBox,
+					/plat/getGUIResponseText,
+					/plat/sendServiceSMS,
+					/plat/sendOpenBoxSMS,
+					/plat/openBox,
+					/plat/toOpenBox,
+					/plat/setSystemUser,
+					/plat/listCourier,
+					/plat/setRecipientCourier,
+					/plat/showMoreCourier,
+					/plat/setCastPartsCourier,
+					/plat/getStoragestationInfo,
+					/plat/searchStorStatus,
+					/plat/searchPeripheralStatus,
+					/plat/loadPeripheralxStatus,
+					/plat/searchBoxInfoStatus,
+					/plat/loadBoxInfoStatus"		
+			class="cn.com.xb.plat.action.StoragestationaGUIAction">
+			<property name="storagestationaService">
+				<ref bean="storagestationaService"/>
+			</property>
+			<property name="smsHelperService">
+				<ref bean="smsHelperService"/>
+			</property>
+			<property name="transactionService">
+				<ref bean="transactionService"/>
+			</property>
+			<property name="userService">
+				<ref bean="userService"/>
+			</property>
+			<property name="courierService">
+				<ref bean="courierService"/>
+			</property>
+			<property name="gbDistrictService">
+				<ref bean="gbDistrictService"/>
+			</property>
+			<property name="operationLogService">
+				<ref bean="operationLogService"/>
+			</property>
+		</bean>
+		
+		<bean name="/plat/usage,
+					/plat/createUsageExcel,
+					/plat/business,
+					/plat/createBusinessExcel,
+					/plat/getStorStatusList,
+					/plat/exportStorStatusExcel" 
+			class="cn.com.xb.plat.action.StatisticsAction">
+			<property name="ssBoxnumLogServer">
+				<ref bean="ssBoxnumLogServer"/>
+			</property>
+			<property name="storagestationaService">
+				<ref bean="storagestationaService"/>
+			</property>
+			<property name="transactionService">
+				<ref bean="transactionService"/>
+			</property>
+			<property name="flagDictionaryService">
+				<ref bean="flagDictionaryService"/>
+			</property>
+			<property name="courierService">
+				<ref bean="courierService"/>
+			</property>
+		</bean>
+		
+		
+		<!-- 角色管理 -->
+		<bean name="/plat/toAddRolePage,
+					/plat/addRole,
+					/plat/getRoleList,
+					/plat/deleteRoleInfo,
+					/plat/toModifyRolePage,
+					/plat/doModifyRole,
+					/plat/toModifyRoleModulePage,
+					/plat/doModifyRoleModule,
+					/plat/getSubRoleModuleList" class="cn.com.xb.plat.action.RoleManagementAction">
+			<property name="flagDictionaryService">
+				<ref bean="flagDictionaryService"/>
+			</property>
+			<property name="roleService">
+				<ref bean="roleService"/>
+			</property>
+			<property name="moduleService">
+				<ref bean="moduleService"/>
+			</property>
+		</bean>
+		
+		<!-- 快递管理 -->
+		<bean name="/plat/toAddCourierGroupPage,
+					/plat/getCourierGroupListBycouComId,
+					/plat/doAddCourierGroup,
+					/plat/getListCourierGroup,
+					/plat/deleteCourierGroup,
+					/plat/toModifyCourierGroupPage,
+					/plat/doModifyCourierGroup,
+					/plat/toModifyCourierPicPage,
+					/plat/doModifyCourierPicInfo,
+					/plat/toAddCourierPage,
+					/plat/addCourierInfo,
+					/plat/uploadCourierPic,
+					/plat/toModifyCourierPage,
+					/plat/doModifyCourierInfo,
+					/plat/deleteCourierInfo,
+					/plat/getCourierList,
+					/plat/getGbDistrictListByParentId,
+					/plat/toAddCourierCompanyPage,
+					/plat/addCourierCompany,
+					/plat/deleteCourierCompany,
+					/plat/toModifyCourierCompanyPage,
+					/plat/doModifyCourierCompany,
+					/plat/getListCourierCompanies" class="cn.com.xb.plat.action.CourierManagementAction">
+			<property name="flagDictionaryService">
+				<ref bean="flagDictionaryService"/>
+			</property>
+			<property name="courierService">
+				<ref bean="courierService"/>
+			</property>
+			<property name="gbDistrictService">
+				<ref bean="gbDistrictService"/>
+			</property>
+		</bean>
+		
+		
+		<!-- 订单管理 -->
+		<bean name="/plat/getOrderList" class="cn.com.xb.plat.action.OrderManagementAction">
+			<property name="orderService">
+				<ref bean="orderService"/>
+			</property>
+			<property name="storagestationaService">
+				<ref bean="storagestationaService"/>
+			</property>
+		</bean>
+		
+		<!-- 操作日志管理 -->
+		<bean name="/plat/getOperationLogList,
+					/plat/exportOperationLogExcel,
+					/plat/getOperationLogDetail" class="cn.com.xb.plat.action.OperationLogManagementAction">
+			<property name="operationLogService">
+				<ref bean="operationLogService"/>
+			</property>
+		</bean>
+</beans>

@@ -1,0 +1,130 @@
+package cn.com.xb.inter.domain;
+
+import java.io.Serializable;
+
+import cn.com.xb.domain.base.BoxInfo;
+import cn.com.xb.util.VerifyTool;
+
+public class IBoxInfo implements Serializable {
+
+	/**
+	 * 箱子详情
+	 */
+	private static final long serialVersionUID = 1L;
+	private String boxCode;// 箱子CODE
+	private String boxIndex;// 箱子序号
+	private String assetSn;// 资产编号
+	private int boxType;// 类型、规格【超大、大、中、小、超小】 类型、规格【1，超大,2，大,3，中,4，小,5，超小】
+	private int boxLoadStatus;// 存货状态【1,空闲;2,占用;3,占用超时;4,弃件（占用超期）】
+	private int boxRunStatus;// 运行状态：1，空闲、2，占用、3，占用超时、4，弃件（占用超期）、5，开启、6，故障、7，租用、8，预留、9，闭塞、10，未关闭、11，被破坏、12，维修
+
+	public String empty(){
+		StringBuffer buffer = new StringBuffer();
+		if(VerifyTool.isNull(this.boxCode)){
+			buffer.append("boxCode不能为空。");
+		}
+		if(VerifyTool.isNull(this.boxIndex)){
+			buffer.append(this.boxCode+"，boxIndex不能为空。");
+		}
+//		if(VerifyTool.isNull(this.assetSn)){
+//			buffer.append(this.boxCode+"，assetSn不能为空。");
+//		}
+		
+		if(this.boxType<1 || this.boxType>5){
+			buffer.append(this.boxCode+"，boxType非法。");
+		}
+		if(this.boxLoadStatus<1 || this.boxLoadStatus>4){
+			buffer.append(this.boxCode+"，boxLoadStatus非法。");
+		}
+		if(this.boxRunStatus<1 || this.boxRunStatus>12){
+			buffer.append(this.boxCode+"，boxRunStatus非法。");
+		}
+		return buffer.toString();
+	}
+	
+	
+	public BoxInfo getBoxInfo() {
+		BoxInfo boxInfo = new BoxInfo();
+		boxInfo.setBoxCode(this.boxCode);
+		boxInfo.setBoxIndex(this.boxIndex);
+		boxInfo.setAssetSn(this.assetSn);
+		boxInfo.setSize(this.boxType);
+		boxInfo.setLoadStatus(this.boxLoadStatus);
+		boxInfo.setRunStatus(this.boxRunStatus);
+		return boxInfo;
+	}
+
+	public IBoxInfo() {
+
+	}
+
+	public IBoxInfo(String boxCode, String boxIndex, String assetSn,
+			int boxType, int boxLoadStatus, int boxRunStatus) {
+		super();
+		this.boxCode = boxCode;
+		this.boxIndex = boxIndex;
+		this.assetSn = assetSn;
+		this.boxType = boxType;
+		this.boxLoadStatus = boxLoadStatus;
+		this.boxRunStatus = boxRunStatus;
+	}
+
+	public String getBoxCode() {
+		return boxCode;
+	}
+
+	public void setBoxCode(String boxCode) {
+		this.boxCode = boxCode;
+	}
+
+	public String getBoxIndex() {
+		return boxIndex;
+	}
+
+	public void setBoxIndex(String boxIndex) {
+		this.boxIndex = boxIndex;
+	}
+
+	public String getAssetSn() {
+		return assetSn;
+	}
+
+	public void setAssetSn(String assetSn) {
+		this.assetSn = assetSn;
+	}
+
+	public int getBoxType() {
+		return boxType;
+	}
+
+	public void setBoxType(int boxType) {
+		this.boxType = boxType;
+	}
+
+	public int getBoxLoadStatus() {
+		return boxLoadStatus;
+	}
+
+	public void setBoxLoadStatus(int boxLoadStatus) {
+		this.boxLoadStatus = boxLoadStatus;
+	}
+
+	public int getBoxRunStatus() {
+		return boxRunStatus;
+	}
+
+	public void setBoxRunStatus(int boxRunStatus) {
+		this.boxRunStatus = boxRunStatus;
+	}
+
+	public IBoxInfo getIBoxInfo(BoxInfo boxInfo) {
+		IBoxInfo iBoxInfo = new IBoxInfo();
+		iBoxInfo.setAssetSn(boxInfo.getAssetSn());
+		iBoxInfo.setBoxCode(boxInfo.getBoxCode());
+		iBoxInfo.setBoxLoadStatus(boxInfo.getLoadStatus());
+		iBoxInfo.setBoxRunStatus(boxInfo.getRunStatus());
+		iBoxInfo.setBoxIndex(boxInfo.getBoxIndex());
+		iBoxInfo.setBoxType(boxInfo.getSize()); // 类型、规格【超大、大、中、小、超小】
+		return iBoxInfo;
+	}
+}

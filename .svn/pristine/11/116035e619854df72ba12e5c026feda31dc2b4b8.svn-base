@@ -1,0 +1,42 @@
+#pager {
+	margin:0 auto;
+	margin-left: 20%;
+}
+
+#result {
+	font-size: 24px;
+	font-family: '微软雅黑', '宋体';
+	color: #333;
+	margin: 0;
+	font-weight: normal;
+}
+
+#pager ul.pages {
+	padding-top: 20px;
+	height: 40px;
+}
+
+#pager ul.pages li {
+	float: left;
+	border: 1px solid #ddd;
+	background: #fff;
+	margin: 0 5px 0 0;
+	padding: 5px 8px;
+}
+
+#pager ul.pages li:hover {
+	border: 1px solid #ec9db1;
+	background: #fff2f5;
+}
+
+#pager ul.pages li.pgEmpty {
+	border: 1px solid #eee;
+	color: #999;
+}
+
+#pager ul.pages li.pgCurrent {
+	border: 1px solid #ec97ab;
+	color: #555;
+	font-weight: 700;
+	background-color: #f8e8ec;
+}

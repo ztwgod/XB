@@ -1,0 +1,230 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title></title>
+    <meta name="Keywords" content="" />
+    <meta name="Description" content="" />
+    <link href="css/css.css" rel="stylesheet" type="text/css" />
+    <script src="js/jquery.min.js" type="text/javascript"></script>
+    <script src="js/ops.js" type="text/javascript"></script>
+    <script src="js/menu.js" type="text/javascript"></script>
+</head>
+<body>
+    <div class="row" style="margin-top: 10px;">
+		<img src="images/titile.gif" />
+    </div>
+	<input type="hidden" value="user_menu_my" name="currMenu" id="currMenu" />
+	
+    <div class="row">	
+        <!-- 菜单 -->
+		<div class="u-menu">
+            <ul class="u-nav" id="user_menu">
+            	
+            	 <li class="item" id="user_menu_my" name="user_menu_my">
+                    <h3 class="t1">个人信息<a name="user_login"></a><span title="折叠"></span></h3>
+                    <ul class="sub">
+                        <li><a class="current" href="userIndex.html">个人主页</a></li>
+                    </ul>
+                </li>
+                
+                <li class="item" id="user_menu_manger" name="user_menu_manger">
+                    <h3 class="t1">用户管理<span title="折叠"></span></h3>
+                    <ul class="sub">
+                        <li><a href="listUser.html">用户信息</a></li>
+                        <li><a href="listRole.html">角色管理</a></li>
+                        <li><a href="listModule.html">模块管理</a></li>
+                    </ul>
+                </li>
+                
+                <li class="item" id="user_menu_box" name="user_menu_box">
+                    <h3 class="t1"> 物箱管理<span title="折叠"></span></h3>
+                    <ul class="sub">
+                         <li><a href="listBox.html">物箱</a></li>
+                         <li><a href="listBoxGroup.html">物箱组</a></li>
+                    </ul>
+                </li>
+                
+                
+                <li class="item" id="user_menu_kdy" name="user_menu_kdy">
+                    <h3 class="t1">快递员管理<span title="折叠"></span></h3>
+                    <ul class="sub">
+                       <li><a href="listCourier.html">快递员</a></li>
+                       <li><a href="listCourierGroup.html">快递员组</a></li>
+                    </ul>
+                </li>
+                
+                <li class="item" id="user_menu_kdgs" name="user_menu_kdgs">
+                    <h3 class="t1">快递公司管理<a name="user_login"></a><span title="折叠"></span></h3>
+                    <ul class="sub">
+                        <li><a  href="listCourierCompanies.html">快递公司</a></li>
+                    </ul>
+                </li>
+                
+                <li class="item" id="user_menu_log" name="user_menu_log">
+                    <h3 class="t1">日志管理<a name="user_login"></a><span title="折叠"></span></h3>
+                    <ul class="sub">
+                        <li><a href="listLog.html">日志查询</a></li>
+                    </ul>
+                </li>
+                
+                <li class="item" id="user_menu_order" name="user_menu_order">
+                    <h3 class="t1">订单管理<a name="user_login"></a><span title="折叠"></span></h3>
+                    <ul class="sub">
+                        <li><a  href="listOrder.html">订单查询</a></li>
+                    </ul>
+                </li>
+                <li class="item" id="user_menu_link" name="user_menu_link">
+                    <h3 class="t1">链接<a name="user_login"></a><span title="折叠"></span></h3>
+                    <ul class="sub">
+                        <li><a  href="#">门户首页</a></li>
+                    </ul>
+                </li>
+                
+            </ul>           
+        </div>
+        <!-- /.u-menu -->
+		<!-- 菜单 -->
+		
+        <div class="u-main">
+            <div class="ucenter">
+                <div class="ucenter-info mt10">
+                    <div class="info-title">
+                        <h5>我的个人主页</h5>
+                    </div>
+                    <div class="info">
+                        <ul class="info-img"><li><img src="images/ico13.gif" class="avatar" /></li></ul>
+                        <div class="info-main">
+                            <div class="row">
+                                <label>
+                                    用户名：</label>张三</div>
+                            <div class="row">
+                                <label>
+                                    注册时间：</label>2013-07-13</div>
+                            <div class="row">
+                                <label>
+                                    所在地：</label>重庆</div>
+                            <div class="row">
+                                <label>
+                                    角色：</label><span class="orange">普通会员</span></div>
+                            <div class="row">
+                                &nbsp;
+                            </div>
+                        </div>
+                        <div class="clear"></div>
+                    </div>
+                </div> 
+                <div class="ucenter-info mt10">
+                <div class="ucenter-tab-box">
+                        <ul class="u-tab clearfix">
+                            <li><a>修改密码</a></li>
+                            <li><a>修改信息</a></li>
+                        </ul>
+                </div>
+                <div id="tab_box">                    
+                    <div class="u-form-wrap" style="display: none;">
+                        <div>
+                        <table border="0" cellpadding="2" class="newTab" cellspacing="1" style="width:80%" align="center">
+					 
+					  <tr>
+                        <td align="right" >旧密码：</td>
+					    <td>
+                        	<input type="text" />
+                        </td>
+					  </tr>
+                      
+                      <tr>
+                        <td align="right" >新密码：</td>
+					    <td>
+                        	<input type="text" />
+                        </td>
+					  </tr>
+                    
+                    <tr>
+                        <td align="right" >确认密码：</td>
+					    <td>
+                        	<input type="text" />
+                        </td>
+					  </tr>
+					  
+					  <tr>
+                        <td align="right" ></td>
+					    <td>
+                        	<button id="do_search" class="search">修改</button>
+                        </td>
+					  </tr>
+                      
+				</table>
+               </div>
+                    </div>
+                    <div class="u-form-wrap" style="display: none;">
+                        <div>
+                        	 <table border="0" cellpadding="2" cellspacing="1" style="width:100%" class="newTab">
+					 
+					  <tr>
+					    
+					    <td align="right" width="20%">账号:</td>
+					    <td width="30%">zhangsan</td>
+					    <td align="right" width="20%;">最后登陆时间:</td>
+					    <td width="30%">2013-09-02 15:23:34</td>
+					  </tr>
+					  
+					  <tr>
+					    <td align="right">注册时间:</td>
+					    <td>2013-09-02 15:23:34</td>
+					    <td align="right">用户名:</td>
+					    <td><input type="text" id="" name="" /></td>
+					  </tr>
+					  
+					 
+					 <tr>
+					    <td align="right">手机:</td>
+					    <td><input type="text" id="mobile" name="mobile" /></td>
+					    <td align="right">Email:</td>
+					    <td >
+							<input type="text" id="email" name="email" />
+						</td>
+					  </tr>
+					 
+					  
+					   <tr>
+					    <td align="right">地址:</td>
+					    <td colspan="3">
+							<select id="adress" name="adress" >
+								<option value="0" selected="selected">请选择</option>
+								<option value="1">上海市</option>
+								<option value="1">北京市</option>
+							</select>
+							
+							<select id="adress" name="adress" >
+								<option value="0" selected="selected">请选择</option>
+								<option value="1">市辖区</option>
+								<option value="1">县</option>
+							</select>
+							
+							<select id="adress" name="adress" >
+								<option value="0" selected="selected">请选择</option>
+								<option value="1">浦东新区</option>
+								<option value="1">杨浦区</option>
+							</select>
+                            <input type="text" id="address" name="address" />
+						</td>
+                       </tr>
+                       
+                       <tr>
+					    <td colspan="3"></td>
+					    <td>
+							<button id="do_search" class="search">修改</button>
+						</td>
+                       </tr>
+				</table>
+                        </div>
+                    </div>
+                </div>                
+            </div>
+            </div>           
+        </div>
+        <!-- /.u-main -->
+    </div>
+</body>
+</html>

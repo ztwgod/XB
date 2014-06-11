@@ -1,0 +1,377 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+		<constant name="struts.action.extension" value="do"/>  
+		<constant name="struts.multipart.maxSize" value="20971520" />
+ 		<package name="plat" extends="struts-default">
+ 			<!-- 平台配置 start -->
+ 			
+ 			<action name="toAddUser" class="/plat/toAddUser" method="toAddUser">
+ 				<result name="success">/plat/addUser.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doAddUser" class="/plat/doAddUser" method="doAddUser">
+ 				<result name="success" type="redirectAction">plat/listUser.do</result>
+ 			</action>
+ 			
+ 			<action name="checkUserAccount" class="/plat/checkUserAccount" method="checkUserAccount"></action>
+ 			
+ 			<action name="listUser" class="/plat/listUser" method="listUser">
+ 				<result name="success">/plat/listUser.jsp</result>
+ 			</action>
+ 			
+ 			<action name="toUpdateUser" class="/plat/toUpdateUser" method="toUpdateUser">
+ 				<result name="success">/plat/updateUser.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doUpdateUser" class="/plat/doUpdateUser" method="doUpdateUser">
+ 				<result name="success" type="redirectAction">plat/listUser.do</result>
+ 			</action>
+ 			
+ 			<action name="doDelete" class="/plat/doDelete" method="doDelete">
+ 				<result name="success" type="redirectAction">plat/listUser.do</result>
+ 			</action>
+ 			
+ 			<action name="listModule" class="/plat/listModule" method="listModule">
+ 				<result name="success">/plat/listModule.jsp</result>
+ 			</action>
+ 			
+ 			<action name="toAddModule" class="/plat/toAddModule" method="toAddModule">
+ 				<result name="success">/plat/addModule.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doAddModule" class="/plat/doAddModule" method="doAddModule">
+ 				<result name="success" type="redirectAction">plat/listModule.do</result>
+ 			</action>
+ 			
+ 			<action name="doDeleteModule" class="/plat/doDeleteModule" method="doDeleteModule">
+ 				<result name="success" type="redirectAction">plat/listModule.do</result>
+ 			</action>
+ 			
+ 			<action name="toUpdateModule" class="/plat/toUpdateModule" method="toUpdateModule">
+ 				<result name="success">/plat/updateModule.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doUpdateModule" class="/plat/doUpdateModule" method="doUpdateModule">
+ 				<result name="success" type="redirectAction">plat/listModule.do</result>
+ 			</action>
+ 			
+ 			<action name="Admin" class="/plat/Admin" method="Admin"> 			
+ 				<result name="success">/plat/login.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doPlatLogin" class="/plat/doPlatLogin" method="doPlatLogin"> 			
+ 				<result name="success" type="redirectAction">plat/toMain.do</result>
+ 				<result name="error">/plat/login.jsp</result>
+ 			</action>
+ 			
+ 			<action name="toMain" class="/plat/toMain" method="toMain">
+ 				<result name="success">/plat/main.jsp</result>
+ 			</action>
+ 			
+ 			<action name="logout" class="/plat/logout" method="logout"> 			
+ 				<result name="success" type="redirectAction">plat/Admin.do</result>
+ 			</action>
+ 			
+ 			<action name="toUserHome" class="/plat/toUserHome" method="toUserHome">
+ 				<result name="success">/plat/home.jsp</result>
+ 			</action>
+ 			
+ 			<action name="toUpdatePlatPassword" class="/plat/toUpdatePlatPassword" method="toUpdatePlatPassword">
+ 				<result name="success">/plat/home.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doUpdatePlatPassword" class="/plat/doUpdatePlatPassword" method="doUpdatePlatPassword">
+ 				<result name="success">/plat/home.jsp</result>
+ 			</action>
+ 			
+ 			<action name="checkPlatOldPasswod" class="/plat/checkPlatOldPasswod" method="checkPlatOldPasswod"></action>
+ 			
+ 			<action name="doUpdatePlatUserInfo" class="/plat/doUpdatePlatUserInfo" method="doUpdatePlatUserInfo">
+ 				<result name="success">/plat/home.jsp</result>
+ 			</action>
+ 			
+ 			<action name="listCard" class="/plat/listCard" method="listCard">
+ 				<result name="success">/plat/listCard.jsp</result>
+ 			</action>
+ 			
+ 			<action name="toAddCard" class="/plat/toAddCard" method="toAddCard">
+ 				<result name="success">/plat/addCard.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doAddCard" class="/plat/doAddCard" method="doAddCard">
+ 				<result name="success" type="redirectAction">plat/listCard.do</result>
+ 			</action>
+ 			
+ 			<action name="toUpdateCard" class="/plat/toUpdateCard" method="toUpdateCard">
+ 				<result name="success">/plat/updateCard.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doUpdateCard" class="/plat/doUpdateCard" method="doUpdateCard">
+ 				<result name="success" type="redirectAction">plat/listCard.do</result>
+ 			</action>
+ 			
+ 			<action name="listBox" class="/plat/listBox" method="listBox">
+ 				<result name="success">/plat/listBox.jsp</result>
+ 			</action>
+ 			
+ 			<action name="toAddBox" class="/plat/toAddBox" method="toAddBox">
+ 				<result name="success">/plat/addBox.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doAddBox" class="/plat/doAddBox" method="doAddBox">
+ 				<result name="success" type="redirectAction">plat/listBox.do</result>
+ 			</action>
+ 			
+ 			<action name="listEgis" class="/plat/listEgis" method="listEgis">
+ 				<result name="success">/plat/listEgisx.jsp</result>
+ 			</action>
+ 			
+ 			<action name="listBoxGroup" class="/plat/listBoxGroup" method="listBoxGroup">
+ 				<result name="success">/plat/listBoxGroup.jsp</result>
+ 			</action>
+ 			
+ 			<action name="toAddBoxGroup" class="/plat/toAddBoxGroup" method="toAddBoxGroup">
+ 				<result name="success">/plat/addBoxGroup.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doAddBoxGroup" class="/plat/doAddBoxGroup" method="doAddBoxGroup">
+ 				<result name="success" type="redirectAction">plat/listBoxGroup.do</result>
+ 			</action>
+ 			
+ 			<action name="toUpdateBoxGroup" class="/plat/toUpdateBoxGroup" method="toUpdateBoxGroup">
+ 				<result name="success">/plat/updateBoxGroup.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doUpdateBoxGroup" class="/plat/doUpdateBoxGroup" method="doUpdateBoxGroup">
+ 				<result name="success" type="redirectAction">plat/listBoxGroup.do</result>
+ 			</action>
+ 			
+ 			<action name="doDeleteBoxGroup" class="/plat/doDeleteBoxGroup" method="doDeleteBoxGroup">
+ 				<result name="success" type="redirectAction">plat/listBoxGroup.do</result>
+ 			</action>
+ 			
+ 			<action name="toUpdateBox" class="/plat/toUpdateBox" method="toUpdateBox">
+ 				<result name="success">/plat/updateBox.jsp</result>
+ 			</action>
+ 			
+ 			<action name="loadBox" class="/plat/loadBox" method="loadBox">
+ 				<result name="success">/plat/boxInfo.jsp</result>
+ 			</action>
+ 			
+ 			<action name="verifyGroupCode" class="/plat/verifyGroupCode" method="verifyGroupCode"></action>
+ 			
+ 			<action name="doUpdateBox" class="/plat/doUpdateBox" method="doUpdateBox">
+ 				<result name="success" type="redirectAction">plat/listBox.do</result>
+ 			</action>
+ 			<action name="doDeleteBox" class="/plat/doDeleteBox" method="doDeleteBox">
+ 				<result name="success" type="redirectAction">plat/listBox.do</result>
+ 			</action>
+ 			<action name="verifyModuleCode" class="/plat/verifyModuleCode" method="verifyModuleCode"></action>
+ 			
+ 			<action name="loadGUIBox" class="/plat/loadGUIBox" method="loadGUIBox">
+ 				<result name="success">/plat/box.jsp</result>
+ 			</action>
+ 			<action name="synchronizedBox" class="/plat/synchronizedBox" method="synchronizedBox">
+ 				<result name="success">/plat/synBoxInfo.jsp</result>
+ 			</action>
+ 			
+ 			<action name="getGUIResponseText" class="/plat/getGUIResponseText" method="getGUIResponseText"></action>
+ 			
+ 			<action name="sendServiceSMS" class="/plat/sendServiceSMS" method="sendServiceSMS">
+ 				<result name="success">/plat/smsInfo.jsp</result>
+ 			</action>
+ 			<action name="sendOpenBoxSMS" class="/plat/sendOpenBoxSMS" method="sendOpenBoxSMS">
+ 				<result name="success">/plat/smsInfo.jsp</result>
+ 			</action>
+ 			
+ 			<action name="openBox" class="/plat/openBox" method="openBox">
+ 				<result name="success">/plat/openBoxInfo.jsp</result>
+ 			</action>
+ 			
+ 			<action name="toOpenBox" class="/plat/toOpenBox" method="toOpenBox">
+ 				<result name="success">/plat/toOpenBoxInfo.jsp</result>
+ 			</action>
+ 			
+ 			<action name="setSystemUser" class="/plat/setSystemUser" method="setSystemUser">
+ 				<result name="success">/plat/setSystemUser.jsp</result>
+ 			</action>
+ 			<action name="listCourier" class="/plat/listCourier" method="listCourier">
+ 				<result name="success">/plat/setlistCourier.jsp</result>
+ 			</action>
+ 			<action name="setRecipientCourier" class="/plat/setRecipientCourier" method="setRecipientCourier">
+ 				<result name="success">/plat/setRecipientCourier.jsp</result>
+ 			</action>
+ 			<action name="showMoreCourier" class="/plat/showMoreCourier" method="showMoreCourier"></action>
+ 			
+ 			<action name="setCastPartsCourier" class="/plat/setCastPartsCourier" method="setCastPartsCourier">
+ 				<result name="success">/plat/setCastPartsCourier.jsp</result>
+ 			</action>
+ 			<action name="searchStorStatus" class="/plat/searchStorStatus" method="searchStorStatus">
+ 				<result name="success">/plat/searchStorStatus.jsp</result>
+ 			</action>
+ 			<action name="getStoragestationInfo" class="/plat/getStoragestationInfo" method="getStoragestationInfo"></action>
+ 			
+ 			<action name="searchPeripheralStatus" class="/plat/searchPeripheralStatus" method="searchPeripheralStatus">
+ 				<result name="success">/plat/searchPeripheralStatus.jsp</result>
+ 			</action>
+ 			<action name="loadPeripheralxStatus" class="/plat/loadPeripheralxStatus" method="loadPeripheralxStatus"></action>
+ 			
+ 			<action name="searchBoxInfoStatus" class="/plat/searchBoxInfoStatus" method="searchBoxInfoStatus">
+ 				<result name="success">/plat/searchBoxInfoStatus.jsp</result>
+ 			</action>
+ 			<action name="loadBoxInfoStatus" class="/plat/loadBoxInfoStatus" method="loadBoxInfoStatus"></action>
+ 			<action name="verifyBaiDuPid" class="/plat/verifyBaiDuPid" method="verifyBaiDuPid"></action>
+ 			<action name="verifySSCode" class="/plat/verifySSCode" method="verifySSCode"></action>
+ 			
+ 			
+ 			
+ 			<!-- 角色管理 -->
+ 			<action name="toAddRolePage" class="/plat/toAddRolePage" method="toAddRolePage">
+ 				<result name="success">/plat/addRole.jsp</result>
+ 			</action>
+ 			<action name="addRole" class="/plat/addRole" method="addRole">
+ 				<result name="success" type="redirectAction">/plat/getRoleList.do</result>
+ 			</action>
+ 			<action name="getRoleList" class="/plat/getRoleList" method="getRoleList">
+ 				<result name="success">/plat/listRole.jsp</result>
+ 			</action>
+ 			<action name="deleteRoleInfo" class="/plat/deleteRoleInfo" method="deleteRoleInfo">
+ 				<result name="success" type="redirectAction">/plat/getRoleList.do</result>
+ 			</action>
+ 			<action name="toModifyRolePage" class="/plat/toModifyRolePage" method="toModifyRolePage">
+ 				<result name="success">/plat/updateRole.jsp</result>
+ 			</action>
+ 			<action name="doModifyRole" class="/plat/doModifyRole" method="doModifyRole">
+ 				<result name="success" type="redirectAction">/plat/toModifyRoleModulePage.do?roleId=${roleId}</result>
+ 			</action>
+ 			<action name="toModifyRoleModulePage" class="/plat/toModifyRoleModulePage" method="toModifyRoleModulePage">
+ 				<result name="success">/plat/updateRoleModule.jsp</result>
+ 			</action>
+ 			<action name="getSubRoleModuleList" class="/plat/getSubRoleModuleList" method="getSubRoleModuleList">
+ 				<result name="success">/plat/roleModuleTreeList.jsp</result>
+ 			</action>
+ 			<action name="doModifyRoleModule" class="/plat/doModifyRoleModule" method="doModifyRoleModule">
+ 				<result name="success" type="redirectAction">/plat/getRoleList.do</result>
+ 			</action>
+ 			
+ 			
+ 			<!-- 快递员管理 -->
+ 			<action name="toAddCourierPage" class="/plat/toAddCourierPage" method="toAddCourierPage">
+ 				<result name="success">/plat/addCourier.jsp</result>
+ 			</action>
+ 			<action name="getCourierGroupListBycouComId" class="/plat/getCourierGroupListBycouComId" method="getCourierGroupListBycouComId">
+ 				<result name="success">/plat/courierGroupSelect.jsp</result>
+ 			</action>
+ 			<action name="addCourierInfo" class="/plat/addCourierInfo" method="addCourierInfo">
+ 				<result name="success">/plat/addCourierUploadPic.jsp</result>
+ 			</action>
+ 			<action name="uploadCourierPic" class="/plat/uploadCourierPic" method="uploadCourierPic">
+ 				<result name="success" type="redirectAction">/plat/getCourierList.do</result>
+ 			</action>
+ 			<action name="toModifyCourierPage" class="/plat/toModifyCourierPage" method="toModifyCourierPage">
+ 				<result name="success">/plat/updateCourier.jsp</result>
+ 			</action>
+ 			<action name="doModifyCourierInfo" class="/plat/doModifyCourierInfo" method="doModifyCourierInfo">
+ 				<result name="success" type="redirectAction">/plat/toModifyCourierPicPage.do?userId=${userId}</result>
+ 			</action>
+ 			<action name="toModifyCourierPicPage" class="/plat/toModifyCourierPicPage" method="toModifyCourierPicPage">
+ 				<result name="success">/plat/updateCourierPic.jsp</result>
+ 			</action>
+ 			<action name="doModifyCourierPicInfo" class="/plat/doModifyCourierPicInfo" method="doModifyCourierPicInfo">
+ 				<result name="success" type="redirectAction">/plat/getCourierList.do</result>
+ 			</action>
+ 			<action name="deleteCourierInfo" class="/plat/deleteCourierInfo" method="deleteCourierInfo">
+ 				<result name="success" type="redirectAction">/plat/getCourierList.do</result>
+ 			</action>
+ 			<action name="getCourierList" class="/plat/getCourierList" method="getCourierList">
+ 				<result name="success">/plat/listCourier.jsp</result>
+ 			</action>
+ 			
+ 			
+ 			<!-- 添加快递员组 -->
+ 			<action name="toAddCourierGroupPage" class="/plat/toAddCourierGroupPage" method="toAddCourierGroupPage">
+ 				<result name="success">/plat/addCourierGroup.jsp</result>
+ 			</action>
+ 			<action name="doAddCourierGroup" class="/plat/doAddCourierGroup" method="doAddCourierGroup">
+ 				<result name="success" type="redirectAction">/plat/getListCourierGroup.do</result>
+ 			</action>
+ 			<action name="getListCourierGroup" class="/plat/getListCourierGroup" method="getListCourierGroup">
+ 				<result name="success">/plat/listCourierGroup.jsp</result>
+ 			</action>
+ 			<action name="deleteCourierGroup" class="/plat/deleteCourierGroup" method="deleteCourierGroup">
+ 				<result name="success" type="redirectAction">/plat/getListCourierGroup.do</result>
+ 			</action>
+ 			<action name="toModifyCourierGroupPage" class="/plat/toModifyCourierGroupPage" method="toModifyCourierGroupPage">
+ 				<result name="success">/plat/updateCourierGroup.jsp</result>
+ 			</action>
+ 			<action name="doModifyCourierGroup" class="/plat/doModifyCourierGroup" method="doModifyCourierGroup">
+ 				<result name="success" type="redirectAction">/plat/getListCourierGroup.do</result>
+ 			</action>
+ 			<action name="getGbDistrictListByParentId" class="/plat/getGbDistrictListByParentId" method="getGbDistrictListByParentId">
+ 				<result name="success">/plat/gbDistrictTreeList.jsp</result>
+ 			</action>
+ 			
+ 			<action name="usage" class="/plat/usage" method="usage">
+ 				<result name="success">/plat/usage.jsp</result>
+ 			</action>
+ 			
+ 			<action name="createUsageExcel" class="/plat/createUsageExcel" method="createUsageExcel"></action>
+ 			
+ 			<action name="business" class="/plat/business" method="business">
+ 				<result name="success">/plat/business.jsp</result>
+ 			</action>
+ 			
+ 			<action name="createBusinessExcel" class="/plat/createBusinessExcel" method="createBusinessExcel"></action>
+ 			
+ 			
+ 			<!-- 快递公司 -->
+ 			<action name="toAddCourierCompanyPage" class="/plat/toAddCourierCompanyPage" method="toAddCourierCompanyPage">
+ 				<result name="success">/plat/addCourierCompany.jsp</result>
+ 			</action>
+ 			<action name="addCourierCompany" class="/plat/addCourierCompany" method="addCourierCompany">
+ 				<result name="success" type="redirectAction">plat/getListCourierCompanies.do</result>
+ 			</action>
+ 			<action name="deleteCourierCompany" class="/plat/deleteCourierCompany" method="deleteCourierCompany">
+ 				<result name="success" type="redirectAction">plat/getListCourierCompanies.do</result>
+ 			</action>
+ 			<action name="toModifyCourierCompanyPage" class="/plat/toModifyCourierCompanyPage" method="toModifyCourierCompanyPage">
+ 				<result name="success">/plat/updateCourierCompanies.jsp</result>
+ 			</action>
+ 			<action name="doModifyCourierCompany" class="/plat/doModifyCourierCompany" method="doModifyCourierCompany">
+ 				<result name="success" type="redirectAction">plat/getListCourierCompanies.do</result>
+ 			</action>
+ 			<action name="getListCourierCompanies" class="/plat/getListCourierCompanies" method="getListCourierCompanies">
+ 				<result name="success">/plat/listCourierCompanies.jsp</result>
+ 			</action>
+ 			
+ 			
+ 			<!-- 订单 -->
+ 			<action name="getOrderList" class="/plat/getOrderList" method="getOrderList">
+ 				<result name="success">/plat/listOrder.jsp</result>
+ 			</action>
+ 			
+ 			
+ 			<!-- 日志 -->
+ 			<action name="getOperationLogList" class="/plat/getOperationLogList" method="getOperationLogList">
+ 				<result name="success">/plat/listLog.jsp</result>
+ 			</action>
+ 			<action name="exportOperationLogExcel" class="/plat/exportOperationLogExcel" method="exportOperationLogExcel"></action>
+ 			<action name="getOperationLogDetail" class="/plat/getOperationLogDetail" method="getOperationLogDetail">
+ 				<result name="success">/plat/operLogDetail.jsp</result>
+ 			</action>
+ 			
+ 			
+ 			
+ 			<action name="getStorStatusList" class="/plat/getStorStatusList" method="getStorStatusList">
+ 				<result name="success">/plat/storStatusInfo.jsp</result>
+ 			</action>
+ 			<action name="exportStorStatusExcel" class="/plat/exportStorStatusExcel" method="exportStorStatusExcel"></action>
+ 			
+ 			
+ 			<!-- 平台配置 end -->
+ 		</package>
+</struts>

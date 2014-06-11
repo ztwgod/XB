@@ -1,0 +1,56 @@
+package cn.com.xb.inter.util;
+
+import javax.servlet.http.HttpServletRequest;
+
+import cn.com.xb.inter.service.XBProcessServer;
+import cn.com.xb.util.Global;
+import cn.com.xb.util.SpringTool;
+
+public class XBProcessFactory {
+
+	public static XBProcessServer create(String applyCode,HttpServletRequest request){
+		XBProcessServer xbProcessServer = null;
+		if(applyCode.equals(Global.XB_001)){ //物箱信息注册同步
+			xbProcessServer = (XBProcessServer)SpringTool.getBean(request, "XBProcessSynchServer");
+		}else if(applyCode.equals(Global.XB_002)){//上传同步交易信息
+			xbProcessServer = (XBProcessServer) SpringTool.getBean(request, "XBProcessTransactionServer");
+		}else if(applyCode.equals(Global.XB_003)){//发送开箱请求至物箱
+			xbProcessServer = (XBProcessServer)SpringTool.getBean(request,"XBProcessOpenBoxServer");
+		}/*else if(applyCode.equals(Global.XB_004)){//开箱逾期信息发送
+			
+			
+		}else if(applyCode.equals(Global.XB_005)){//通知平台已开启的箱子信息
+			
+			
+		}else if(applyCode.equals(Global.XB_006)){//平台计算快递费用
+			
+			xbProcessServer = (XBProcessServer)SpringTool.getBean(request, "XBProcessCalculateCourierCostsServer");
+			
+		}*/else if(applyCode.equals(Global.XB_007)){ //同步箱子状态
+			xbProcessServer = (XBProcessServer)SpringTool.getBean(request, "XBProcessSynchStorageStationServer");
+		}else if(applyCode.equals(Global.XB_008)){ //更新快递员信息
+			xbProcessServer = (XBProcessServer)SpringTool.getBean(request, "XBProcessSynchCourierServer");
+		}else if(applyCode.equals(Global.XB_009)){//更新维护人员信息
+			xbProcessServer = (XBProcessServer)SpringTool.getBean(request, "XBProcessSynchSysUserServer");
+		}/*else if(applyCode.equals(Global.XB_010)){//发送寄存请求
+			
+			
+		}else if(applyCode.equals(Global.XB_011)){//通知箱子5秒后打开
+			
+			
+		}*/else if(applyCode.equals(Global.XB_012)){//APP登陆
+			xbProcessServer = (XBProcessServer)SpringTool.getBean(request, "XBProcessAppLoginServer");
+		}else if(applyCode.equals(Global.XB_013)){//APP请求开箱
+			xbProcessServer = (XBProcessServer)SpringTool.getBean(request, "XBProcessAppOpenBoxServer");
+		}else if(applyCode.equals(Global.XB_014)){//开箱结果反馈接口
+			xbProcessServer = (XBProcessServer)SpringTool.getBean(request, "XBProcessAppOpenBoxResultServer");
+		}else if(applyCode.equals(Global.XB_015)){//APP获取交易列表
+			xbProcessServer = (XBProcessServer)SpringTool.getBean(request, "XBProcessAppGetTransactionListServer");
+		}else if (applyCode.equals("16")) {
+			xbProcessServer = (XBProcessServer)SpringTool.getBean(request, "XBProcessWeChatOpenBoxServer");
+		}else if (applyCode.equals("17")) {
+			xbProcessServer = (XBProcessServer)SpringTool.getBean(request,"XBProcessWeChatGetOrderServer");
+		}
+		return xbProcessServer;
+	}
+}

@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+		
+		<bean name="userService" class="cn.com.xb.service.impl.UserServiceImpl">
+			<property name="userDao">
+				<ref bean="userDao"/>
+			</property>
+			<property name="userDaox">
+				<ref bean="userDaox"/>
+			</property>
+			<property name="pSysDao">
+				<ref bean="pSysDao"/>
+			</property>
+			<property name="pClientDao">
+				<ref bean="pClientDao"/>
+			</property>
+			<property name="mysqlDbUtilDao">
+				<ref bean="mysqlDbUtilDao"/>
+			</property>
+			<property name="userRoleDao">
+				<ref bean="userRoleDao"/>
+			</property>
+			<property name="userRoleDaox">
+				<ref bean="userRoleDaox"/>
+			</property>
+			<property name="roleDaox">
+				<ref bean="roleDaox"/>
+			</property>
+			<property name="sysuserStoragestationDao">
+				<ref bean="sysuserStoragestationDao"/>
+			</property>
+			<property name="authCardDaox">
+				<ref bean="authCardDaox"/>
+			</property>
+			<property name="operationLogDao">
+				<ref bean="operationLogDao"/>
+			</property>
+		</bean>
+		
+		<bean name="flagDictionaryService" class="cn.com.xb.service.impl.FlagDictionaryServiceImpl">
+			<property name="flagDictionaryDaox">
+				<ref bean="flagDictionaryDaox"/>
+			</property>
+		</bean>
+		
+		<bean name="moduleService" class="cn.com.xb.service.impl.ModuleServiceImpl">
+			<property name="moduleDao">
+				<ref bean="moduleDao"/>
+			</property>
+			<property name="moduleDaox">
+				<ref bean="moduleDaox"/>
+			</property>
+		</bean>
+		
+		<bean name="userRoleService" class="cn.com.xb.service.impl.UserRoleServiceImpl">
+			<property name="userRoleDaox">
+				<ref bean="userRoleDaox"/>
+			</property>
+		</bean>
+		
+		<bean name="authCardService" class="cn.com.xb.service.impl.AuthCardServiceImpl">
+			<property name="authCardDaox">
+				<ref bean="authCardDaox"/>
+			</property>	
+			<property name="authCardDao">
+				<ref bean="authCardDao"/>
+			</property>		
+			<property name="issuedAgencyDao">
+				<ref bean="issuedAgencyDao"/>
+			</property>
+			<property name="operationLogDao">
+				<ref bean="operationLogDao"/>
+			</property>
+		</bean>
+		
+		<bean name="storagestationaService" class="cn.com.xb.service.impl.StoragestationaServiceImpl">
+			<property name="storagestationTypeDao">
+				<ref bean="storagestationTypeDao"/>
+			</property>
+			<property name="storagestationDao">
+				<ref bean="storagestationDao"/>
+			</property>
+			<property name="sysuserStoragestationDao">
+				<ref bean="sysuserStoragestationDao"/>
+			</property>
+			<property name="storagestationModelDao">
+				<ref bean="storagestationModelDao"/>
+			</property>
+			<property name="storagestationGroupDao">
+				<ref bean="storagestationGroupDao"/>
+			</property>
+			<property name="locationDao">
+				<ref bean="locationDao"/>
+			</property>
+			<property name="storagestationGroupDaox">
+				<ref bean="storagestationGroupDaox"/>
+			</property>
+			<property name="storagestationDaox">
+				<ref bean="storagestationDaox"/>
+			</property>
+			<property name="storagestationDeliveryGDao">
+				<ref bean="storagestationDeliveryG"/>
+			</property>
+			<property name="peripheralServer">
+				<ref bean="peripheralServer"/>
+			</property>
+			<property name="cabinetDao">
+				<ref bean="cabinetDao"/>
+			</property>
+			<property name="boxInfoDao">
+				<ref bean="boxInfoDao"/>
+			</property>
+			<property name="leaseAliasesDao">
+				<ref bean="leaseAliasesDao"/>
+			</property>
+			<property name="leaseBoxRelaDao">
+				<ref bean="leaseBoxRelaDao"/>
+			</property>
+			<property name="cabinetDaox">
+				<ref bean="cabinetDaox"/>
+			</property>
+			<property name="storagestationPeripheralDaox">
+				<ref bean="storagestationPeripheralDaox"/>
+			</property>
+			<property name="boxInfoDaox">
+				<ref bean="boxInfoDaox"/>
+			</property>
+			<property name="operationLogDao">
+				<ref bean="operationLogDao"/>
+			</property>
+			<property name="locationDaox">
+				<ref bean="locationDaox"/>
+			</property>
+			<property name="storagestationModelDaox">
+				<ref bean="storagestationModelDaox"/>
+			</property>
+		</bean>
+		
+		<bean name="boxInfoService" class="cn.com.xb.service.impl.BoxInfoServiceImpl">
+			<property name="boxInfoDaox">
+				<ref bean="boxInfoDaox"/>
+			</property>
+			<property name="storagestationDaox">
+				<ref bean="storagestationDaox"/>
+			</property>
+			<property name="cabinetDaox">
+				<ref bean="cabinetDaox"/>
+			</property>
+			<property name="storagestationPeripheralDaox">
+				<ref bean="storagestationPeripheralDaox"/>
+			</property>
+		</bean>
+		
+		<bean name="smsHelperService" class="cn.com.xb.service.helper.impl.SMSHelperServiceImpl"></bean>
+		
+		<bean name="transactionService" class="cn.com.xb.service.impl.TransactionServiceImpl">
+			<property name="transactionDaox">
+				<ref bean="transactionDaox"/>
+			</property>
+			<property name="transactionDao">
+				<ref bean="transactionDao"/>
+			</property>
+			<property name="boxInfoDaox">
+				<ref bean="boxInfoDaox"/>
+			</property>
+			<property name="userDao">
+				<ref bean="userDao"/>
+			</property>
+			<property name="userDaox">
+				<ref bean="userDaox"/>
+			</property>
+			<property name="clientDao">
+				<ref bean="pClientDao"/>
+			</property>
+			<property name="transActionDetailDao">
+				<ref bean="transActionDetailDao"/>
+			</property>
+			<property name="feeProofDao">
+				<ref bean="feeProofDao"/>
+			</property>
+		</bean>
+		
+		<bean name="peripheralServer" class="cn.com.xb.service.impl.PeripheralServerImpl">
+			<property name="peripheralDao">
+				<ref bean="peripheralDao"/>
+			</property>
+			<property name="storagestationPeripheralDao">
+				<ref bean="storagestationPeripheralDao"/>
+			</property>
+		</bean>
+		
+		<bean name="cabinetServer" class="cn.com.xb.service.impl.CabinetServerImpl">
+			<property name="cabinetDaox">
+				<ref bean="cabinetDaox"/>
+			</property>
+		</bean>
+		
+		<bean name="locationServer" class="cn.com.xb.service.impl.LocationServerImpl">
+			<property name="locationDaox">
+				<ref bean="locationDaox"/>
+			</property>
+		</bean>
+		
+		<bean name="ssBoxnumLogServer" class="cn.com.xb.service.impl.SsBoxnumLogServerImpl">
+			<property name="ssboxnumLogDao">
+				<ref bean="ssBoxnumLogDao"/>
+			</property>
+			<property name="boxInfoDaox">
+				<ref bean="boxInfoDaox"/>
+			</property>
+			<property name="ssBoxnumLogDaox">
+				<ref bean="ssBoxnumLogDaox"/>
+			</property>
+		</bean>
+		
+		<!-- 物箱平台接口部分配置 -->
+		<bean name="openBoxServerImpl" class="cn.com.xb.gui.service.impl.OpenBoxServerImpl">
+			<property name="userDaox">
+				<ref bean="userDaox"/>
+			</property>
+		</bean>
+		
+		
+		<bean name="XBProcessOpenBoxServer" class="cn.com.xb.inter.service.impl.XBProcessOpenBoxServerImpl"></bean>
+		
+		<bean name="XBProcessSynchServer" class="cn.com.xb.inter.service.impl.XBProcessSynchServerImpl">
+			<property name="storagestationaService">
+				<ref bean="storagestationaService"/>
+			</property>
+			<property name="peripheralServer">
+				<ref bean="peripheralServer"/>
+			</property>
+			<property name="cabinetServer">
+				<ref bean="cabinetServer"/>
+			</property>
+			<property name="boxInfoService">
+				<ref bean="boxInfoService"/>
+			</property>
+			<property name="operationLogService">
+				<ref bean="operationLogService"/>
+			</property>
+			<property name="ssBoxnumLogServer">
+				<ref bean="ssBoxnumLogServer"/>
+			</property>
+		</bean>
+		
+		<bean name="XBProcessSynchStorageStationServer" class="cn.com.xb.inter.service.impl.XBProcessSynchStorageStationServerImpl">
+			<property name="storagestationaService">
+				<ref bean="storagestationaService"/>
+			</property>
+			<property name="boxInfoService">
+				<ref bean="boxInfoService"/>
+			</property>
+			<property name="operationLogService">
+				<ref bean="operationLogService"/>
+			</property>
+		</bean>
+		
+		<bean name="XBProcessCalculateCourierCostsServer" class="cn.com.xb.inter.service.impl.XBProcessCalculateCourierCostsServerImpl">
+		
+		
+		</bean>
+		
+		<bean name="XBProcessAppLoginServer" class="cn.com.xb.inter.service.impl.XBProcessAppLoginServerImpl">
+			<property name="userService">
+				<ref bean="userService"/>
+			</property>
+		</bean>
+		
+		<bean name="XBProcessAppOpenBoxServer" class="cn.com.xb.inter.service.impl.XBProcessAppOpenBoxServerImpl">
+			<property name="transactionDaox">
+				<ref bean="transactionDaox"/>
+			</property>
+		</bean>
+		
+		<!-- 跟新快递员信息 -->
+		<bean name="XBProcessSynchCourierServer" class="cn.com.xb.inter.service.impl.XBProcessSynchCourierServerImpl">
+			<property name="storagestationaService">
+				<ref bean="storagestationaService"/>
+			</property>
+			<property name="courierService">
+				<ref bean="courierService"/>
+			</property>
+			<property name="operationLogService">
+				<ref bean="operationLogService"/>
+			</property>
+		</bean>
+		
+		<bean name="XBProcessSynchSysUserServer" class="cn.com.xb.inter.service.impl.XBProcessSynchSysUserServerImpl">
+			<property name="sysUserDaox">
+				<ref bean="sysUserDaox"/>
+			</property>
+			<property name="storagestationaService">
+				<ref bean="storagestationaService"/>
+			</property>
+			<property name="operationLogService">
+				<ref bean="operationLogService"/>
+			</property>
+		</bean>
+		
+		<bean name="XBProcessAppOpenBoxResultServer" class="cn.com.xb.inter.service.impl.XBProcessAppOpenBoxResultServerImpl"></bean>
+		
+		
+		<bean name="XBProcessTransactionServer" class="cn.com.xb.inter.service.impl.XBProcessTransactionServerImpl">
+			<property name="transactionService">
+				<ref bean="transactionService"/>
+			</property>
+			<property name="ssService">
+				<ref bean="storagestationaService"/>
+			</property>
+			<property name="operationLogService">
+				<ref bean="operationLogService"/>
+			</property>
+		</bean>
+		
+		<bean name="XBProcessAppGetTransactionListServer" class="cn.com.xb.inter.service.impl.XBProcessAppGetTransactionListServerImpl">
+			<property name="transactionDaox">
+				<ref bean="transactionDaox"/>
+			</property>
+		</bean>
+		
+		
+		<!-- end -->
+		
+		
+		
+		<!-- 角色管理 -->
+		<bean name="roleService" class="cn.com.xb.service.impl.RoleServiceImpl">
+			<property name="roleDao">
+				<ref bean="roleDao"/>
+			</property>
+			<property name="roleDaox">
+				<ref bean="roleDaox"/>
+			</property>
+		</bean>
+		<!-- 快递公司 -->
+		<bean name="courierService" class="cn.com.xb.service.impl.CourierServiceImpl">
+			<property name="expressCompanyDao">
+				<ref bean="expressCompanyDao"/>
+			</property>
+			<property name="courierDaox">
+				<ref bean="courierDaox"/>
+			</property>
+			<property name="courierGroupDao">
+				<ref bean="courierGroupDao"/>
+			</property>
+			<property name="pCourierDao">
+				<ref bean="pCourierDao"/>
+			</property>
+			<property name="userDao">
+				<ref bean="userDao"/>
+			</property>
+			<property name="blobFilesDaox">
+				<ref bean="blobFilesDaox"/>
+			</property>
+			<property name="userDaox">
+				<ref bean="userDaox"/>
+			</property>
+			<property name="operationLogDao">
+				<ref bean="operationLogDao"/>
+			</property>
+		</bean>
+		<!-- 行政区域 -->
+		<bean name="gbDistrictService" class="cn.com.xb.service.impl.GbDistrictServiceImpl">
+			<property name="gbDistrictDao">
+				<ref bean="gbDistrictDao"/>
+			</property>
+			<property name="gbDistrictDaox">
+				<ref bean="gbDistrictDaox"/>
+			</property>
+		</bean>
+		
+		<!-- 订单 -->
+		<bean name="orderService" class="cn.com.xb.service.impl.OrderServiceImpl">
+			<property name="orderDaox">
+				<ref bean="orderDaox"/>
+			</property>
+		</bean>
+		
+		<!-- 操作日志 -->
+		<bean name="operationLogService" class="cn.com.xb.service.impl.OperationLogServiceImpl">
+			<property name="operationLogDao">
+				<ref bean="operationLogDao"/>
+			</property>
+			<property name="operationLogDaox">
+				<ref bean="operationLogDaox"/>
+			</property>
+		</bean>
+		
+		<!-- 接口日志 -->
+		<bean name="interfaceLogService" class="cn.com.xb.service.impl.InterfaceLogServiceImpl">
+			<property name="silDao">
+				<ref bean="storagestationIntfLogDao"/>
+			</property>
+		</bean>
+</beans>
+
+
+
+
+
+

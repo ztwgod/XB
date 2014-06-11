@@ -1,0 +1,215 @@
+﻿<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%String path = request.getContextPath();%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="sql" uri="http://java.sun.com/jsp/jstl/sql" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>讯宝-订单列表</title>
+    <link href="<%=path%>/css/plat/css.css" rel="stylesheet" type="text/css" />
+    <link href="<%=path%>/css/plat/pager.css" rel="stylesheet" type="text/css" />
+    
+    <script src="<%=path%>/js/jquery.min.js" type="text/javascript"></script>
+    <script src="<%=path%>/js/plat/menu.js" type="text/javascript"></script>
+    <script src="<%=path%>/js/calendar.js" type="text/javascript"></script>
+    <script src="<%=path%>/js/plat/jquery.pager.js" type="text/javascript"></script>
+    <script type="text/javascript">
+	jQuery(document).ready(function() { 
+		jQuery("#pager").pager({ 
+			pagenumber: ${page.pageNumber}, 
+			pagecount: ${page.pageCount},
+			buttonClickCallback: PageClick }); 
+		});
+	
+		PageClick = function(pageclickednumber) { 
+			jQuery("#pager").pager({ 
+				pagenumber: pageclickednumber, 
+				pagecount: ${page.pageCount}, 
+				buttonClickCallback: PageClick 
+		}); 
+		//alert("当前第" + pageclickednumber + "页");
+		document.getElementById('frm').action = '<%=path%>/plat/getOrderList.do?pageNum=' + pageclickednumber;
+		document.getElementById('do_search').click();
+	}
+	</script>
+    
+</head>
+<body>
+      
+        <div class="u-main">
+            <div class="ucenter-info mt10">
+                <div class="u-tab-wrap">
+                    <ul class="u-tab clearfix">
+                        <li  class="current"><a>订单查询</a></li>
+                    </ul>
+                    <!-- /.u-tab -->
+                </div>
+                
+                <div id="tab-box">
+                    <div class="u-form-wrap">
+                    <!--  <div class="m-sub-til" style="padding: 0;"></div> -->     
+                    
+		                <div class="demo">
+							<ul class="clearfix">
+								<li>业务管理<em></em><i></i></li>
+								<li>订单管理<em></em><i></i></li>							
+								<li class="current">订单列表<em></em><i></i></li>
+							</ul>
+						</div>                 
+                       <div class="search-box" style="margin-bottom: 15px; border:#ebebeb solid 1px;">
+                       <form id="frm" name="frm" action="<%=path%>/plat/getOrderList.do" method="post">
+                            <table class="tabSearch">
+                                <tr>
+                                    <td align="right">订单号：</td>
+                                    <td><input type="text" id="orderCode" name="orderCode" value="${golp.orderCode }"/></td>
+                                    <td align="right">收 / 发件人手机号：</td>
+                                    <td><input type="text" id="mobileNumber" name="mobileNumber" value="${golp.mobileNumber }"/></td>
+                                </tr>
+                                <tr>
+                                    <td align="right">物箱组：</td>
+                                    <td><select id="groupId" name="groupId">
+                                    		<option value="">-- 请选择 --</option>
+                                    		<c:forEach items="${storGroup}" var="sg">
+                                    			<option value="${sg.groupId}" <c:if test="${golp.groupId eq sg.groupId}">selected="selected"</c:if> >${sg.groupAbb}</option>
+                                    		</c:forEach>
+                                    	</select>
+                                    </td>
+                                    <td align="right">物箱Code：</td>
+                                    <td><input type="text" id="ssCode" name="ssCode" value="${golp.ssCode}"/></td>
+                                </tr>
+                                <tr>
+                                    <td align="right">订单创建日期：</td>
+                                    <td><input type="text" id="startDate" name="startDate" value="${golp.startDate}" style="border:1px solid #999; width: 80px;" onclick="new Calendar().show(this);" readonly="readonly" />
+                                    	&nbsp;至&nbsp;
+									<input type="text" id="endDate" name="endDate" value="${golp.endDate}" style="border:1px solid #999; width: 80px;" onclick="new Calendar().show(this);" readonly="readonly" /></td>
+                                    <td align="right">每页记录条数：</td>
+                                    <td><select id="pageSize" name="pageSize">
+                                    		<option value="10" <c:if test="${page.pageSize eq 10}">selected="selected"</c:if>>10</option>
+                                    		<option value="20" <c:if test="${page.pageSize eq 20}">selected="selected"</c:if>>20</option>
+                                    		<option value="30" <c:if test="${page.pageSize eq 30}">selected="selected"</c:if>>30</option>
+                                    		<option value="40" <c:if test="${page.pageSize eq 40}">selected="selected"</c:if>>40</option>
+                                    		<option value="50" <c:if test="${page.pageSize eq 50}">selected="selected"</c:if>>50</option>
+                                    		<option value="60" <c:if test="${page.pageSize eq 60}">selected="selected"</c:if>>60</option>
+                                    		<option value="70" <c:if test="${page.pageSize eq 70}">selected="selected"</c:if>>70</option>
+                                    		<option value="80" <c:if test="${page.pageSize eq 80}">selected="selected"</c:if>>80</option>
+                                    		<option value="90" <c:if test="${page.pageSize eq 90}">selected="selected"</c:if>>90</option>
+                                    		<option value="100" <c:if test="${page.pageSize eq 100}">selected="selected"</c:if>>100</option>
+                                    	</select>
+                                    </td>
+                                </tr>
+                               
+                                 <tr>
+                                    <td align="right" colspan="3"></td>
+                                    
+                                    <td align="left">
+                                    	<button id="do_search" class="search">查询</button>
+                                    </td>
+                                </tr>
+                            </table>
+                        </form>
+                        </div>
+						
+						<table class="u-table">
+                            <tr>
+                                <th width="10%">
+                                    订单号 
+                                </th>
+                                <th width="10%">
+                                    发件人 
+                                </th>
+                                <th width="10%">
+                                    收件人 
+                                </th>
+                                <th width="10%">
+                                    订单类型
+                                </th>
+                                <th width="10%">
+                                    订单状态
+                                </th>
+                                <th width="50%">
+                                    订单详情
+                                </th>
+                            </tr>
+                            
+                            <c:forEach items="${ows }" var="ow">
+                            	<tr>
+	                                <td>
+	                                	${ow.transCode }
+	                                </td>
+	                                <td title="联系方式：${ow.senderMobileNum }">
+	                                	${ow.senderName }
+	                                </td>
+	                                <td title="联系方式：${ow.addresseeMobileNum }">
+	                                	${ow.addresseeName }
+	                                </td>
+	                                <td>
+	                                	${ow.transTypeShow }
+	                                </td>
+	                                <td>
+	                                	${ow.transStatusShow }
+	                                </td>
+	                                <td align="left" style="text-align: left;">
+	                                	<c:if test="${not empty ow.tadws}">
+	                                	<c:forEach items="${ow.tadws}" var="tadw">
+	                                		<font color="#009900"><fmt:formatDate value="${tadw.actionTime }" pattern="yyyy-MM-dd HH:mm:ss"/></font> 
+	                                		<c:if test="${tadw.transActionType eq 1}">
+	                                			客户<b title="联系方式: ${tadw.actionerMobileNum }"><u>${tadw.actionerName }</u></b>成功投入寄件快件
+	                                		</c:if>
+	                                		<c:if test="${tadw.transActionType eq 2}">
+	                                			快递员<b title="联系方式: ${tadw.actionerMobileNum }"><u>${tadw.actionerName }</u></b>已成功将快件取走
+	                                		</c:if>
+	                                		<c:if test="${tadw.transActionType eq 3}">
+	                                			快递员<b title="联系方式: ${tadw.actionerMobileNum }"><u>${tadw.actionerName }</u></b>已成功将快件投递进物箱
+	                                		</c:if>
+	                                		<c:if test="${tadw.transActionType eq 4}">
+	                                			客户<b title="联系方式: ${tadw.actionerMobileNum }"><u>${tadw.actionerName }</u></b>已成功将快件取走
+	                                		</c:if>
+	                                		<c:if test="${tadw.transActionType eq 5}">
+	                                			客户<b title="联系方式: ${tadw.actionerMobileNum }"><u>${tadw.actionerName }</u></b>成功寄存一个快件
+	                                		</c:if>
+	                                		<c:if test="${tadw.transActionType eq 6}">
+	                                			客户<b title="联系方式: ${tadw.actionerMobileNum }"><u>${tadw.actionerName }</u></b>成功将寄存件取走
+	                                		</c:if>
+	                                		<c:if test="${tadw.transActionType eq 7}">
+	                                			客户<b title="联系方式: ${tadw.actionerMobileNum }"><u>${tadw.actionerName }</u></b>想寄件，但无空箱
+	                                		</c:if>
+	                                		<c:if test="${tadw.transActionType eq 8}">
+	                                			快递员<b title="联系方式: ${tadw.actionerMobileNum }"><u>${tadw.actionerName }</u></b>想投件，但无空箱
+	                                		</c:if>
+	                                		<c:if test="${tadw.transActionType eq 9}">
+	                                			客户<b title="联系方式: ${tadw.actionerMobileNum }"><u>${tadw.actionerName }</u></b>想寄存，但无空箱
+	                                		</c:if>
+	                                		<c:if test="${tadw.transActionType eq 10}">
+	                                			快递员<b title="联系方式: ${tadw.actionerMobileNum }"><u>${tadw.actionerName }</u></b>的投件被退件
+	                                		</c:if>
+	                                		<c:if test="${tadw.transActionType eq 11}">
+	                                			客户<b title="联系方式: ${tadw.actionerMobileNum }"><u>${tadw.actionerName }</u></b>的寄存件被退件
+	                                		</c:if>
+	                                		
+	                                		<c:if test="${not empty tadw.feeProof}">
+	                                			通过<b>${tadw.feeProof.payMethods eq 1 ? "投币" : "优惠劵" }</b>方式付费<b>${tadw.feeProof.amount }</b>元RMB
+	                                		</c:if>
+	                                		<br />
+	                                	</c:forEach>
+	                                	</c:if>
+	                                	<c:if test="${empty ow.tadws}">
+	                                		无订单详情
+	                                	</c:if>
+	                                </td>
+	                            </tr>
+                            </c:forEach>
+                        </table>
+                          <div id="pager" ></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- /.u-main -->
+    </div>
+    <!-- /.row -->
+</body>
+
+</html>

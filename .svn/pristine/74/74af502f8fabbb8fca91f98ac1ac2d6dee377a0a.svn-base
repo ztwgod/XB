@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<title>XB平台子系统</title>
+<link rel="stylesheet" rev="stylesheet" href="css/style.css" type="text/css" media="all" />
+<script language="JavaScript" type="text/javascript">
+
+</script>
+<style type="text/css">
+<!--
+.atten {font-size:12px;font-weight:normal;color:#F00;}
+-->
+</style>
+</head>
+
+<body class="ContentBody">
+  <form action="" method="post" name="fom" id="fom" target="sypost" >
+<div class="MainDiv">
+<table width="99%" border="0" cellpadding="0" cellspacing="0" class="CContent">
+  <tr>
+      <th class="tablestyle_title" >查用户信息查看</th>
+  </tr>
+  <tr>
+    <td class="CPanel">
+		
+		<table border="0" cellpadding="0" cellspacing="0" style="width:100%">
+		<tr><td align="left">
+			
+			<input type="button" name="Submit2" value="返回" class="button" onclick="window.history.go(-1);"/>
+		</td></tr>
+
+		<TR>
+			<TD width="100%">
+				<fieldset style="height:100%;">
+				<legend>查用户信息查看</legend>
+					  <table border="0" cellpadding="2" cellspacing="1" style="width:100%">
+					 
+					  <tr>
+					    <td align="right" width="30%">用户名:</td>
+					    <td width="20%">张三</td>
+					    <td align="right" width="10%">账号:</td>
+					    <td width="40%">zhangsan</td>
+					  </tr>
+					  
+					  <tr>
+					    <td align="right">注册时间:</td>
+					    <td>2013-09-02</td>
+					    <td align="right">最后登陆时间:</td>
+					    <td>2013-09-02</td>
+					  </tr>
+					  
+					   <tr>
+					    <td align="right">状态:</td>
+					    <td>
+							禁用
+						</td>
+						
+					    <td align="right">Email:</td>
+					    <td>zhangsan@sina.com </td>
+						</tr>
+					 
+					 <tr>
+					    <td align="right">手机:</td>
+					    <td>13651675443</td>
+					    <td align="right">用户类型:</td>
+					    <td >
+							注册用户
+						</td>
+					  </tr>
+					  
+					  <tr>
+					    <td align="right">邮编:</td>
+					    <td>200100</td>
+					    <td align="right">用户组:</td>
+					    <td >
+							注册用户组
+						</td>
+					  </tr>
+					  
+					   <tr>
+					    <td align="right">地址:</td>
+					    <td colspan="3">
+							上海市浦东新区北海路234号
+						</td>
+				
+				</table>
+			 	<br />
+				</fieldset>
+            </TD>
+		</TR>
+		
+		</TABLE>
+	
+	
+	 </td>
+  </tr>
+  
+
+		
+		
+		
+		
+		<TR>
+			<TD colspan="2" align="center" height="50px">
+			<input type="button" name="Submit" value="修改" class="button" onclick="link();"/>　
+			
+			<input type="button" name="Submit2" value="返回" class="button" onclick="window.history.go(-1);"/></TD>
+		</TR>
+		</TABLE>
+	
+	
+	 </td>
+  </tr>
+  
+  
+  
+  
+  </table>
+
+</div>
+</form>
+</body>
+</html>

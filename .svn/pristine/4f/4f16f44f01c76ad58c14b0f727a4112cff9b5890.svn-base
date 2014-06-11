@@ -1,0 +1,6 @@
+#BaiDu Map config
+BAIDUMAP_AK=t9PPyPpIKrxgYdCoasCfXlXN
+BAIDUMAP_MDKEY=44543
+
+##true接口不验证数据有效性
+IS_DEBUG=TRUE

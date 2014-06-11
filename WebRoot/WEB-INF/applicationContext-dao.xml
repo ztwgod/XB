@@ -1,0 +1,331 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xmlns="http://www.springframework.org/schema/beans"
+		xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+		xmlns:aop="http://www.springframework.org/schema/aop"
+		xmlns:tx="http://www.springframework.org/schema/tx"
+		xsi:schemaLocation="
+			http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+			http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-2.5.xsd
+			http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd">
+			
+		
+		<bean name="userDao" class="cn.com.xb.dao.impl.UserDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		<bean name="userDaox" class="cn.com.xb.daox.impl.UserDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		<bean name="flagDictionaryDaox" class="cn.com.xb.daox.impl.FlagDictionaryDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="pSysDao" class="cn.com.xb.dao.impl.PSysDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="pClientDao" class="cn.com.xb.dao.impl.PClientDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="mysqlDbUtilDao" class="cn.com.xb.daox.impl.MysqlDbUtilDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="moduleDao" class="cn.com.xb.dao.impl.ModuleDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="moduleDaox" class="cn.com.xb.daox.impl.ModuleDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="userRoleDao" class="cn.com.xb.dao.impl.UserRoleDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="userRoleDaox" class="cn.com.xb.daox.impl.UserRoleDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="authCardDaox" class="cn.com.xb.daox.impl.AuthCardDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="authCardDao" class="cn.com.xb.dao.impl.AuthCardDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="storagestationTypeDao" class="cn.com.xb.dao.impl.StoragestationTypeDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="storagestationDao" class="cn.com.xb.dao.impl.StoragestationDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="sysuserStoragestationDao" class="cn.com.xb.dao.impl.SysuserStoragestationDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="storagestationModelDao" class="cn.com.xb.dao.impl.StoragestationModelDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="storagestationGroupDao" class="cn.com.xb.dao.impl.StoragestationGroupDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="locationDao" class="cn.com.xb.dao.impl.LocationDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="storagestationGroupDaox" class="cn.com.xb.daox.impl.StoragestationGroupDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="storagestationDaox" class="cn.com.xb.daox.impl.StoragestationDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="boxInfoDaox" class="cn.com.xb.daox.impl.BoxInfoDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="transactionDaox" class="cn.com.xb.daox.impl.TransactionDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="transactionDao" class="cn.com.xb.dao.impl.TransactionDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="transActionDetailDao" class="cn.com.xb.dao.impl.TransActionDetailDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="feeProofDao" class="cn.com.xb.dao.impl.FeeProofDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="storagestationDeliveryG" class="cn.com.xb.dao.impl.StoragestationDeliveryGDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="leaseAliasesDao" class="cn.com.xb.dao.impl.LeaseAliasesDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		<bean name="leaseBoxRelaDao" class="cn.com.xb.dao.impl.LeaseBoxRelaDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="cabinetDaox" class="cn.com.xb.daox.impl.CabinetDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="cabinetDao" class="cn.com.xb.dao.impl.CabinetDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="boxInfoDao" class="cn.com.xb.dao.impl.BoxInfoDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="storagestationPeripheralDaox" class="cn.com.xb.daox.impl.StoragestationPeripheralDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="storagestationPeripheralDao" class="cn.com.xb.dao.impl.StoragestationPeripheralDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="peripheralDao" class="cn.com.xb.dao.impl.PeripheralDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="sysUserDaox" class="cn.com.xb.daox.impl.SysUserDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>	
+		
+		<bean name="locationDaox" class="cn.com.xb.daox.impl.LocationDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="storagestationModelDaox" class="cn.com.xb.daox.impl.StoragestationModelDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="ssBoxnumLogDao" class="cn.com.xb.dao.impl.SsBoxnumLogDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="ssBoxnumLogDaox" class="cn.com.xb.daox.impl.SsBoxnumLogDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<!-- 角色管理 -->
+		<bean name="roleDao" class="cn.com.xb.dao.impl.RoleDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		<bean name="roleDaox" class="cn.com.xb.daox.impl.RoleDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		<!-- 快递公司 -->
+		<bean name="expressCompanyDao" class="cn.com.xb.dao.impl.ExpressCompanyDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		<!-- 快递相关 -->
+		<bean name="courierDaox" class="cn.com.xb.daox.impl.CourierDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		<bean name="courierGroupDao" class="cn.com.xb.dao.impl.CourierGroupDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		<bean name="pCourierDao" class="cn.com.xb.dao.impl.PCourierDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		<bean name="blobFilesDaox" class="cn.com.xb.daox.impl.BlobFilesDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		<!-- 行政区划 -->
+		<bean name="gbDistrictDaox" class="cn.com.xb.daox.impl.GbDistrictDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+				</property>
+		</bean>
+		<bean name="gbDistrictDao" class="cn.com.xb.dao.impl.GbDistrictDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<bean name="issuedAgencyDao" class="cn.com.xb.dao.impl.IssuedAgencyDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<!-- 订单 -->
+		<bean name="orderDaox" class="cn.com.xb.daox.impl.OrderDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<!-- 操作日志 -->
+		<bean name="operationLogDao" class="cn.com.xb.dao.impl.OperationLogDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		<bean name="operationLogDaox" class="cn.com.xb.daox.impl.OperationLogDaoxImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+		
+		<!-- 操作日志 -->
+		<bean name="storagestationIntfLogDao" class="cn.com.xb.dao.impl.StoragestationIntfLogDaoImpl">
+			<property name="jdbcTemplate">
+				<ref bean="jdbcTemplate"/>
+			</property>
+		</bean>
+</beans>
+
+
+
+
+
+

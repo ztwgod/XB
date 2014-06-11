@@ -1,0 +1,318 @@
+package cn.com.xb.util;
+
+import java.text.SimpleDateFormat;
+import java.util.List;
+
+import cn.com.xb.inter.domain.IBoxInfo;
+import cn.com.xb.inter.domain.ICabinetContainer;
+import cn.com.xb.inter.domain.IDeviceStatus;
+import cn.com.xb.inter.domain.IPeripheral;
+import cn.com.xb.inter.domain.request.AppOpenBoxWrapper;
+import cn.com.xb.inter.domain.request.DepositUnpackInfoWarpper;
+import cn.com.xb.inter.domain.request.GetTransactionListWrapper;
+import cn.com.xb.inter.domain.request.StorageStationStatusWrapper;
+import cn.com.xb.inter.domain.request.SynchCourierWrapper;
+import cn.com.xb.inter.domain.request.SynchWrapper;
+import cn.com.xb.inter.domain.request.TransactionWrapper;
+import cn.com.xb.inter.service.impl.XBProcessTransactionServerImpl;
+
+public class VerifyTool {
+	
+	/**
+	 * App请求开箱
+	 * @param appOpenBoxWrapper
+	 * @return
+	 */
+	public static String verify(AppOpenBoxWrapper appOpenBoxWrapper){
+		String isDebug = ClientProperty.getProperty("config", "IS_DEBUG");
+		if(isDebug.equalsIgnoreCase("true")){
+			return null;
+		}
+		
+		StringBuffer errorMsg = new StringBuffer();
+		try {
+			errorMsg.append(appOpenBoxWrapper.empty());
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorMsg.append("AppOpenBoxWrapper传入数据非法"+e.getMessage());
+		}
+		return errorMsg.toString();
+	}
+	
+	
+	/**
+	 * APP获取交易列表
+	 * @param getTransactionListWrapper
+	 * @return
+	 */
+	public static String verify(GetTransactionListWrapper getTransactionListWrapper){
+		String isDebug = ClientProperty.getProperty("config", "IS_DEBUG");
+		if(isDebug.equalsIgnoreCase("true")){
+			return null;
+		}
+		
+		StringBuffer errorMsg = new StringBuffer();
+		try {
+			errorMsg.append(getTransactionListWrapper.empty());
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorMsg.append("getTransactionListWrapper传入数据非法"+e.getMessage());
+		}
+		return errorMsg.toString();
+	}
+	
+	
+	/**
+	 * 快递员同步信息同步
+	 */
+	public static String verify(SynchCourierWrapper synchCourierWrapper){
+		String isDebug = ClientProperty.getProperty("config", "IS_DEBUG");
+		if(isDebug.equalsIgnoreCase("true")){
+			return null;
+		}
+		
+		StringBuffer errorMsg = new StringBuffer();
+		
+		try {
+			errorMsg.append(synchCourierWrapper.empty());
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorMsg.append("synchCourierWrapper传入数据非法"+e.getMessage());
+		}
+		return errorMsg.toString();
+	}
+	
+	
+	/**
+	 * 同步物箱状态
+	 * @param storageStationStatusWrapper
+	 * @return
+	 */
+	public static String verify(StorageStationStatusWrapper storageStationStatusWrapper){
+		
+		String isDebug = ClientProperty.getProperty("config", "IS_DEBUG");
+		if(isDebug.equalsIgnoreCase("true")){
+			return null;
+		}
+		
+		StringBuffer errorMsg = new StringBuffer();
+		try {
+			errorMsg.append(storageStationStatusWrapper.empty());
+			//外围设备运行状态列表
+			List<IDeviceStatus>	peripheralRunStatus = storageStationStatusWrapper.getPeripheralRunStatus();
+			if(null==peripheralRunStatus){
+				errorMsg.append("peripheralRunStatus不能为空。");
+			}else if(peripheralRunStatus.size()==0){
+				errorMsg.append("peripheralRunStatus不能为空。");
+			}else{
+				for (IDeviceStatus iDeviceStatus : peripheralRunStatus) {
+					errorMsg.append(iDeviceStatus.empty());
+				}
+			}
+			
+			List<IDeviceStatus>	cabinetContainerStatus = storageStationStatusWrapper.getCabinetContainerStatus();
+			if(null==cabinetContainerStatus){
+				errorMsg.append("cabinetContainerStatus不能为空。");
+			}else if(cabinetContainerStatus.size()==0){
+				errorMsg.append("cabinetContainerStatus不能为空。");
+			}else{
+				for (IDeviceStatus iDeviceStatus : cabinetContainerStatus) {
+					errorMsg.append(iDeviceStatus.empty());
+				}
+			}
+			
+			List<IDeviceStatus> boxLoadStatus = storageStationStatusWrapper.getBoxLoadStatus();
+			if(null==boxLoadStatus){
+				errorMsg.append("boxLoadStatus不能为空。");
+			}else if(boxLoadStatus.size()==0){
+				errorMsg.append("boxLoadStatus不能为空。");
+			}else{
+				for (IDeviceStatus iDeviceStatus : boxLoadStatus) {
+					errorMsg.append(iDeviceStatus.empty());
+				}
+			}
+			
+			List<IDeviceStatus>	boxRunStatus = storageStationStatusWrapper.getBoxRunStatus();
+			if(null==boxRunStatus){
+				errorMsg.append("boxRunStatus不能为空。");
+			}else if(boxRunStatus.size()==0){
+				errorMsg.append("boxRunStatus不能为空。");
+			}else{
+				for (IDeviceStatus iDeviceStatus : boxRunStatus) {
+					errorMsg.append(iDeviceStatus.empty());
+				}
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorMsg.append("StorageStationStatusWrapper 传入数据非法"+e.getMessage());
+		}
+		return errorMsg.toString();
+	}
+	
+	/**
+	 * 物箱注册同步验证
+	 * @param synchWrapper
+	 * @return
+	 */
+	public static String verify(SynchWrapper synchWrapper){
+		
+		String isDebug = ClientProperty.getProperty("config", "IS_DEBUG");
+		if(isDebug.equalsIgnoreCase("true")){
+			return null;
+		}
+		
+		StringBuffer errorMsg = new StringBuffer();
+		try {
+			errorMsg.append(synchWrapper.empty());
+			if(null==synchWrapper.getStorageStation()){
+				errorMsg.append("storageStation不能为空。");
+			}else{
+				errorMsg.append(synchWrapper.getStorageStation().empty());
+			}
+			
+			if(null==synchWrapper.getStorageStation().getPeripherals()){//外围设备列表
+				errorMsg.append("peripherals不能为空。");
+			}else{
+				List<IPeripheral> peripherals = synchWrapper.getStorageStation().getPeripherals();
+				if(peripherals.size()==0){
+					errorMsg.append("peripherals不能为空。");
+				}else{
+					for (IPeripheral iPeripheral : peripherals) {
+						errorMsg.append(iPeripheral.empty());
+					}
+				}
+			}
+			
+			if(null==synchWrapper.getStorageStation().getCabinetContainers()){ //柜子
+				errorMsg.append("cabinetContainers不能为空。");
+			}else{
+				List<ICabinetContainer> cabinetContainers = synchWrapper.getStorageStation().getCabinetContainers();
+				for (ICabinetContainer iCabinetContainer : cabinetContainers) {
+					errorMsg.append(iCabinetContainer.empty());
+					//获取箱子信息
+					List<IBoxInfo> iBoxInfos = iCabinetContainer.getBoxInfos();
+					if(null==iBoxInfos){
+						errorMsg.append("boxInfos不能为空。");
+					}else if(iBoxInfos.size()==0){
+						errorMsg.append("boxInfos不能为空。");
+					}else{
+						for (IBoxInfo iBoxInfo : iBoxInfos) {
+							errorMsg.append(iBoxInfo.empty());
+						}
+					}
+				}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorMsg.append("SynchWrapper 传入数据非法"+e.getMessage());
+		}
+		return errorMsg.toString();
+	}
+
+	/**
+	 * 交易信息验证是否为空
+	 * @param transactionWrapper
+	 * @return
+	 */
+	public static String verify(TransactionWrapper transactionWrapper){
+		
+		String isDebug = ClientProperty.getProperty("config", "IS_DEBUG");
+		if(isDebug.equalsIgnoreCase("true")){
+			return null;
+		}
+		
+		StringBuffer errorMsg = new StringBuffer();
+		try {
+			errorMsg.append(transactionWrapper.empty());
+			errorMsg.append(transactionWrapper.getTransactionInfo().empty());
+			if(new XBProcessTransactionServerImpl().isExpressTrans(transactionWrapper.getTransActionType())){ //快递员交易单
+				if(null==transactionWrapper.getTransactionInfo().getCourierInfo()){
+					errorMsg.append("courierInfo不能为空");
+				}else{
+					errorMsg.append(transactionWrapper.getTransactionInfo().getCourierInfo().empty());
+				}
+			}else{ //不为快递交易单
+				if(null==transactionWrapper.getTransactionInfo().getSenderInfo()){
+					errorMsg.append("senderInfo不能为空");
+				}else{
+					errorMsg.append(transactionWrapper.getTransactionInfo().getSenderInfo().empty());
+				}
+				if(null==transactionWrapper.getTransactionInfo().getAddresseeInfo()){
+					errorMsg.append("addresseeInfo不能为空");
+				}else{
+					errorMsg.append(transactionWrapper.getTransactionInfo().getAddresseeInfo().empty());
+				}
+			}
+			if(!StringUtil.isNull(errorMsg.toString())){ //验证不通过,返回信息到客户端
+				return errorMsg.toString();
+			}
+		} catch (Exception e1) {
+			e1.printStackTrace();
+			return "TransactionWrapper 传入数据非法"+e1.getMessage();
+		}
+		return errorMsg.toString();
+	}
+	
+	/**
+	 * 检验输入是否为正确的日期格式(不含秒的任何情况)
+	 * 严格要求日期正确性,格式:yyyy-MM-dd HH:mm
+	 * @param sourceDate
+	 * @return
+	 */
+	public static boolean isDate(String sourceDate) {
+		if (sourceDate == null) {
+			return false;
+		}
+		try {
+			sourceDate= sourceDate.replaceAll("/", "-");
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			dateFormat.setLenient(false);
+			dateFormat.parse(sourceDate);
+			return true;
+		} catch (Exception e) {
+			return false;
+		}
+	}
+	
+	public static boolean isNull(String object){
+		if(null==object){
+			return true;
+		}else if("".equals(object)){
+			return true;
+		}else if("null".equalsIgnoreCase(object)){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	
+	/**
+	 * 通知箱子5秒后打开
+	 * @deprecated 无用
+	 * @param depositUnpackInfoWarpper
+	 * @return
+	 */
+	public static String verify(DepositUnpackInfoWarpper depositUnpackInfoWarpper){
+		
+		String isDebug = ClientProperty.getProperty("config", "IS_DEBUG");
+		if(isDebug.equalsIgnoreCase("true")){
+			return null;
+		}
+		
+		StringBuffer errorMsg = new StringBuffer();
+		try {
+			errorMsg.append(depositUnpackInfoWarpper.empty());
+		} catch (Exception e) {
+			e.printStackTrace();
+			errorMsg.append("DepositUnpackInfoWarpper传入数据非法"+e.getMessage());
+		}
+		return errorMsg.toString();
+	}
+	
+	public static void main(String[] args) {
+		AppOpenBoxWrapper synchCourierWrapper = new AppOpenBoxWrapper();
+		synchCourierWrapper.setClientUploadTime("2013-09-08 12:54:00");
+		System.out.println(VerifyTool.verify(synchCourierWrapper));
+	}
+}

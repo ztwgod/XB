@@ -1,0 +1,17 @@
+<!-- MySql -->
+<Context>
+	<Resource name="jdbc/XBDataSource" auth="Container"
+		type="javax.sql.DataSource" maxActive="50" maxIdle="30"
+		maxWait="10000" logAbandoned="true" username="root"
+		password="ftp123" driverClassName="com.mysql.jdbc.Driver"
+		url="jdbc:mysql://192.168.0.88:7001/XB?characterEncoding=UTF-8" />
+</Context>
+<!-- Oracle 
+<Context>	
+	<Resource name="jdbc/EmallDataSource" auth="Container"
+		type="javax.sql.DataSource" maxActive="50" maxIdle="30"
+		maxWait="10000" logAbandoned="true" username="System"
+		password="zhangwei" driverClassName="oracle.jdbc.driver.OracleDriver"
+		url="jdbc:oracle:thin:@127.0.0.1:1521:XE" />
+</Context>
+-->

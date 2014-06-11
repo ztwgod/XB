@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+		<constant name="struts.action.extension" value="do"/>  
+ 		<package name="portal" extends="struts-default">
+ 			
+ 			<!-- 门户配置 start --> 			
+ 			<action name="toLogin" class="/portal/toLogin" method="toLogin"> 			
+ 				<result name="success">/portal/login.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doLogin" class="/portal/doLogin" method="doLogin"> 			
+ 				<result name="success">/portal/index.jsp</result>
+ 				<result name="error">/portal/login.jsp</result>
+ 			</action>
+ 			
+ 			<action name="portalLogout" class="/portal/portalLogout" method="portalLogout"> 			
+ 				<result name="success">/portal/login.jsp</result>
+ 			</action>
+ 			
+ 			<action name="loadMap" class="/portal/loadMap" method="loadMap"> 			
+ 				<result name="success">/portal/map.jsp</result>
+ 			</action>
+ 			
+ 			<action name="loadBoxCnt" class="/portal/loadBoxCnt" method="loadBoxCnt"></action>
+ 			
+ 			<action name="toRegister" class="/portal/toRegister" method="toRegister">
+ 				<result name="success">/portal/register.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doRegister" class="/portal/doRegister" method="doRegister">
+ 				<result name="success" type="redirectAction">
+ 					 portal/toRegister2?userId=${userId}  
+ 				</result>
+ 			</action>
+ 			
+ 			<action name="toRegister2" class="/portal/toRegister2" method="toRegister2">
+ 				<result name="success">/portal/register2.jsp</result>
+ 			</action>
+ 			
+ 			<action name="toRegister3" class="/portal/toRegister3" method="toRegister3">
+ 				<result name="success">/portal/register3.jsp</result>
+ 			</action>
+ 			
+ 			<action name="getGbDistrictListByPId" class="/portal/getGbDistrictListByPId" method="getGbDistrictListByPId">
+ 				<result name="success">/portal/gbDistrictTreeList.jsp</result>
+ 			</action>
+ 			
+ 			<action name="getStorGroupListByDistrict" class="/portal/getStorGroupListByDistrict" method="getStorGroupListByDistrict"></action>
+ 			<action name="getStorListByGroupId" class="/portal/getStorListByGroupId" method="getStorListByGroupId"></action>
+ 			<action name="getBoxInfoBySSId" class="/portal/getBoxInfoBySSId" method="getBoxInfoBySSId"></action>
+ 			
+ 			
+ 			<action name="doRegister2" class="/portal/doRegister2" method="doRegister2">
+ 				<!--  注释掉定制物箱
+ 				<result name="success" type="redirectAction">
+ 					 portal/toRegister3?userId=${userId}  
+ 				</result>
+ 				 -->
+ 				 <result name="success" type="redirectAction">portal/toLogin.do</result>
+ 				 
+ 			</action>
+ 			<action name="doRegister3" class="/portal/doRegister3" method="doRegister3">
+ 				<result name="success" type="redirectAction">portal/toLogin.do</result>
+ 			</action>
+ 			
+ 			
+ 			<action name="getUserInfo" class="/portal/getUserInfo" method="getUserInfo">
+ 				<result name="success">/portal/loadUserInfo.jsp</result>
+ 			</action>
+ 			
+ 			<action name="toUpdatePassword" class="/portal/toUpdatePassword" method="toUpdatePassword">
+ 				<result name="success">/portal/updatePassword.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doUpdatePassword" class="/portal/doUpdatePassword" method="doUpdatePassword">
+ 				<result name="success">/portal/updatePassword.jsp</result>
+ 			</action>
+ 			
+ 			<action name="checkOldPasswod" class="/portal/checkOldPasswod" method="checkOldPasswod"></action>
+ 			
+ 			<action name="verifyUserAccount" class="/portal/verifyUserAccount" method="verifyUserAccount"></action>
+ 			
+ 			<action name="toUdpateUserInfo" class="/portal/toUdpateUserInfo" method="toUdpateUserInfo">
+ 				<result name="success">/portal/updateUserInfo.jsp</result>
+ 			</action>
+ 			
+ 			<action name="doUdpateUserInfo" class="/portal/doUdpateUserInfo" method="doUdpateUserInfo">
+ 				<result name="success">/portal/updateUserInfo.jsp</result>
+ 			</action>
+			
+			<!-- 订单查询 -->
+ 			<action name="loadOrderList" class="/portal/loadOrderList" method="loadOrderList">
+ 				<result name="success">/portal/loadOrder.jsp</result>
+ 			</action>
+ 			<!-- 门户配置 end -->
+ 		</package>
+</struts>

@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+
+	<!-- 配置文件 -->
+  <context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			/WEB-INF/plat-applicationContext.xml,
+			/WEB-INF/portal-applicationContext.xml,
+			/WEB-INF/applicationContext-server.xml,
+			/WEB-INF/applicationContext-dao.xml,
+			/WEB-INF/applicationContext-JTA.xml
+		</param-value>
+	</context-param>
+	<listener>
+		<listener-class>
+			org.springframework.web.context.ContextLoaderListener
+		</listener-class>
+	</listener>
+	
+	<!-- 中文乱码过滤处理 -->
+ 	<filter>
+		<filter-name>encoding</filter-name>
+		<filter-class>
+			cn.com.xb.util.EncodingFilter
+		</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>encoding</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 门户登陆验证过滤器 -->
+ 	<filter>
+		<filter-name>portalSession</filter-name>
+		<filter-class>
+			cn.com.xb.util.PortalFilter
+		</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>portalSession</filter-name>
+		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	
+	<!-- 平台登陆验证过滤器 -->
+ 	<filter>
+		<filter-name>platSession</filter-name>
+		<filter-class>
+			cn.com.xb.util.PlatFilter
+		</filter-class>
+	</filter>
+	
+	<filter-mapping>
+		<filter-name>platSession</filter-name>
+		<url-pattern>*.do</url-pattern>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+	
+	<!-- struts2 -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>
+			org.apache.struts2.dispatcher.FilterDispatcher
+		</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.do</url-pattern>
+	</filter-mapping>
+	
+	<!-- HTTP LONG -->
+	<servlet>
+        <servlet-name>CometServlet</servlet-name>
+        <servlet-class>cn.com.xb.http.comet.TomcatHttpServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CometServlet</servlet-name>
+        <url-pattern>/cometServlet</url-pattern>
+    </servlet-mapping>
+    
+  
+  <servlet>
+    <servlet-name>RootServlet</servlet-name>
+    <servlet-class>cn.com.xb.servlet.RootServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>XBPhysicalBoxServlet</servlet-name>
+    <servlet-class>cn.com.xb.servlet.XBPhysicalBoxServlet</servlet-class>
+  </servlet>
+
+  <servlet-mapping>
+    <servlet-name>RootServlet</servlet-name>
+    <url-pattern>/RootServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>XBPhysicalBoxServlet</servlet-name>
+    <url-pattern>/XBPhysicalBoxServlet</url-pattern>
+  </servlet-mapping>
+	 
+	<session-config>
+  		<session-timeout>30</session-timeout>
+	</session-config>
+	
+</web-app>

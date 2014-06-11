@@ -1,0 +1,41 @@
+.eigTab {
+	width: 100%;
+	background-color: #F5F8FD;
+	border: 1px solid #a6c9e1;
+	margin-top: 20px;
+}
+
+.sTab {
+	width: 100%;
+	background-color: #F5F8FD;
+	border: 1px solid #a6c9e1;
+	margin-top: 10px;
+}
+
+table.sTab td {
+	height: 40px;
+}
+
+.egisBut {
+	background-color: #a6c9e1;
+	border: 0;
+	color: white;
+	cursor: pointer;
+	height: 28px;
+	width: 40px;
+}
+
+table.eigTab th {
+	background-color: #a6c9e1;
+	height: 32px;
+	border: 1px solid #F5F8FD;
+	color: white;
+}
+
+table.eigTab td {
+	height: 32px;
+	text-align: center;
+	border-bottom: 1px solid #a6c9e1;
+	border-right: 1px solid #a6c9e1;
+	font-size: 14px;
+}
